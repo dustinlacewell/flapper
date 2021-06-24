@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+      "target": "esnext",
+      "lib": ["es6", "dom", "dom.iterable"],
+      "module": "commonjs",
+      "moduleResolution": "node",
+      "jsx": "react",
+      "sourceMap": true,
+      "esModuleInterop": true,
+      "removeComments": true,
+      "experimentalDecorators": true,
+      "skipLibCheck": true,
+      "baseUrl": ".",
+      "paths": {
+          "@ui": ["src/components"],
+          "@layouts": ["src/layouts"],
+          "@SiteTemplate": ["src/templates/SiteTemplate"],
+          "@templates": ["src/templates"]
+      },
+      "plugins": [{ "name": "typescript-plugin-css-modules" }]
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "**/*.spec.ts"]
+}

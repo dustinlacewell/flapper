@@ -1,0 +1,31 @@
+.link {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    div {
+        position: relative;
+
+        div {
+            &::after {
+                content: "";
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: max(2px, 0.12em);
+                background-color: red;
+                opacity: 0;
+                transition: opacity 300ms, transform 300ms;
+                transform: scaleX(0) scaleY(1);
+                transform-origin: center;
+            }
+        }
+    }
+
+    &:hover div div::after,
+    &:focus div div::after {
+        opacity: 1;
+        transform: scaleX(1) scaleY(1);
+    }
+}
