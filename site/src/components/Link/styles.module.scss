@@ -1,7 +1,8 @@
 .link {
-    display: flex;
+    display: inline-flex;
     flex-direction: column;
     justify-content: center;
+    font-weight: 700;
 
     div {
         position: relative;
@@ -14,7 +15,7 @@
                 left: 0;
                 width: 100%;
                 height: max(2px, 0.12em);
-                background-color: red;
+                background-color: fuchsia;
                 opacity: 0;
                 transition: opacity 300ms, transform 300ms;
                 transform: scaleX(0) scaleY(1);

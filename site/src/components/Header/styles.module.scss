@@ -1,0 +1,29 @@
+.header {
+    padding: 0.5em 2em;
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid grey;
+
+    .logo {
+        display: flex;
+
+        & > div {
+            display: flex;
+            align-items: center;
+
+            & > div:first-child {
+                font-weight: 700;
+            }
+
+            & > div:last-child {
+                margin: 10px;
+                width: 32px;
+                height: 32px;
+            }
+        }
+    }
+
+    .spacer {
+        flex-grow: 1;
+    }
+}

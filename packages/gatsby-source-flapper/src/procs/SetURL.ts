@@ -1,0 +1,33 @@
+import Handlebars from 'handlebars';
+
+import { Asset,Proc } from '../types';
+
+
+const rsplit = (input: string, sep: string, maxsplit: number): string[] => {
+    var split = input.split(sep);
+    return maxsplit ? [ split.slice(0, -maxsplit).join(sep) ].concat(split.slice(-maxsplit)) : split;
+}
+
+export const SetURL: Proc = (pattern: string, removeExtension = true, cleanIndexes = true) => {
+    const template = Handlebars.compile(pattern)
+    return async (context, type, assets) => {
+        if (assets.length === 0) {
+            assets.push(new Asset(SetURL.name, null, {name: "Generated"}))
+        }
+        for (const asset of assets) {
+            const rendered_target = template(asset)
+            let no_ext_target = rendered_target;
+            if (removeExtension) {
+                const parts = rsplit(rendered_target, '.', 2)
+                no_ext_target = parts[1]
+            }
+            let prefixed_target = no_ext_target.startsWith('/') ? no_ext_target : `/${no_ext_target}`
+            if (cleanIndexes) {
+                prefixed_target = prefixed_target.endsWith('/index') ? prefixed_target.slice(0, prefixed_target.length - 5) : prefixed_target
+                prefixed_target = prefixed_target.endsWith('/index.html') ? prefixed_target.slice(0, prefixed_target.length - 10) : prefixed_target
+            }
+            asset.target = prefixed_target
+            console.log(`Set URL: ${asset.target}`)
+        }
+    }
+}

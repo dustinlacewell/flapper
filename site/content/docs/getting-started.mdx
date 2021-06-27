@@ -1,0 +1,80 @@
+---
+menu_label: Getting Started
+sidebar_position: 1
+---
+
+import SyntaxHighlighter from "react-syntax-highlighter"
+import { monokai } from "react-syntax-highlighter/dist/esm/styles/hljs"
+
+# Getting Started with Flapper
+
+In this guide, you'll learn how to integrate Flapper with Gatsby, get an overview of the core concepts, and build a simple blog.
+
+## Installation
+
+    TODO: Write installation guide
+
+## How does Flapper work?
+
+There are a few major concepts in Flapper:
+
+-   **Assets**: Javascript objects that hold whatever data is useful to you
+-   **Asset Types**: A collection of Assets that have the same structure
+-   **Proccesor**: A function which updates Asset data
+-   **Pipeline**: A series of Processors which build the Assets of an Asset Type
+-   **Stage**: A way to name a group of Pipelines to control ordering of the build
+
+Instead of offering built-in metaphors like "pages", "posts", "categories" and "tags", Flapper lets you design whatever works for your site.
+
+We'll go over each of these concepts in detail now.
+
+### Assets
+
+Plain ol javascript objects, with whatever data is useful.
+
+Assets represent the individual items within some group of similar assets. These could represent static pages of your site, posts of a blog, but also software projects, your favorite movies, and whatever else.
+
+What data assets should have really comes down to what you want to display on your site, via your templates, and what data is needed to drive them.
+
+### Processor
+
+Plain ol javascript functions, that modify Assets in whatever way is useful.
+
+Processors are responsible for providing the initial data for Assets, and adding any computed data they need.
+
+Need to convert a title into a slug? Need to associate an asset with other "related" assets? Whatever processing of an Asset's data you need to do, you'll do it within a Processor function.
+
+### Pipelines and Stages
+
+Pipelines are where you define an Asset Type and the series of Processors that will build its Assets. Each Pipeline is an array of Processors. Each Stage is an object mapping named Pipelines. Multiple Stages are composed by name into a final parent object.
+
+<SyntaxHighlighter language="javascript" style={monokai}>{`
+const stages = {
+    'reading-stage': {
+        'your-asset-name': [
+            GetDataFromSource( ... ),
+            AddTitle( ... ),
+            SetURL( ... )
+        ],
+        'your-second-asset': [
+            ProcedurallyGenerateData( ... ),
+            DoCleverThing( ... ),
+            SetURL( ... ),
+        ],
+    },
+    'writing-stage': {
+        'your-asset-name': [
+            RenderTemplate( ... ),
+        ],
+        'your-second-asset': [
+            RenderTemplate( ... ),
+        ],
+    },
+}
+`}</SyntaxHighlighter>
+
+Stages and Pipelines are executed in the order they are defined. This structure defines the entire build process and allows for precise control over ordering where needed.
+
+There can be multiple Pipelines for the same Asset Type. In the example above, both Asset Types appear in both Stages. The Assets generated in the first stage carry over to the second.
+
+A good reason to use Stages to organize the ordering like this, is to ensure that all assets have received a URL by the time that template rendering happens. This guarantees that templates can render links to the Assets of any Asset Type.

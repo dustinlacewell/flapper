@@ -1,6 +1,6 @@
 # Gatsby Kontent Packages
 
-![build](https://github.com/Kentico/gatsby-source-kontent/workflows/build/badge.svg)
+![build](https://github.com/dustinlacewell/flapper/workflows/build/badge.svg)
 [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/)
 
 [![Stack Overflow](https://img.shields.io/badge/Stack%20Overflow-ASK%20NOW-FE7A16.svg?logo=stackoverflow&logoColor=white)](https://stackoverflow.com/tags/kentico-kontent)
@@ -16,8 +16,7 @@ The repository contains the development site (`/site`) that could automatically 
 
 |                                 Package                                 | Summary                                                                         |                                                                        Version                                                                         |
 | :---------------------------------------------------------------------: | :------------------------------------------------------------------------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------: |
-| [Gatsby Source Kontent Plugin](/packages/gatsby-source-kontent#readme)  | plugin providing data from Kentico Kontent REST API to Gatsby GraphQL model     |     [![npm version](https://badge.fury.io/js/%40kentico%2Fgatsby-source-kontent.svg)](https://badge.fury.io/js/%40kentico%2Fgatsby-source-kontent)     |
-| [Gatsby Kontent Components](/packages/gatsby-kontent-components#readme) | package containing React components useful when processing Kontent data to site | [![npm version](https://badge.fury.io/js/%40kentico%2Fgatsby-kontent-components.svg)](https://badge.fury.io/js/%40kentico%2Fgatsby-kontent-components) |
+| [Gatsby Source Flapper Plugin](/packages/gatsby-source-flapper#readme)  | plugin providing data from Kentico Kontent REST API to Gatsby GraphQL model     |     [![npm version](https://badge.fury.io/js/%40kentico%2Fgatsby-source-flapper.svg)](https://badge.fury.io/js/%40kentico%2Fgatsby-source-flapper)     |
 
 ### Site
 

@@ -1,0 +1,11 @@
+.sideMenu {
+    flex-direction: column;
+
+    .menuItem {
+        display: flex;
+    }
+
+    .activeMenuItem {
+        text-decoration: underline;
+    }
+}

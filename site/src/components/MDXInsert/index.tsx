@@ -2,14 +2,17 @@ import React from "react"
 
 import { MDXRenderer } from "gatsby-plugin-mdx"
 
+import { Flex } from "@chakra-ui/react"
 import { MDXProvider } from "@mdx-js/react"
 
 
 const component = ({ context, asset }) => {
     return asset.mdx ? (
-        <MDXProvider>
-            <MDXRenderer context={context} asset={asset}>{asset.mdx.body}</MDXRenderer>
-        </MDXProvider>
+        <Flex flexDir="column">
+            <MDXProvider>
+                <MDXRenderer context={context} asset={asset}>{asset.mdx.body}</MDXRenderer>
+            </MDXProvider>
+        </Flex>
     ) : null
 }
 

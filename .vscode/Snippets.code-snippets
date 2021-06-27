@@ -1,0 +1,21 @@
+{
+    "Functional Component": {
+        "scope": "typescript,typescriptreact",
+        "prefix": "fc",
+        "body": [
+            "export type $1Props = {",
+            "    $2: $3",
+            "}",
+            "",
+            "export const $1: FC<$1Props> = ({ $2 }) => {",
+            "    $4",
+            "}"
+        ],
+        "description": "Functional React Component"
+    },
+    "React Props Type": {
+        "scope": "typescript,typescriptreact",
+        "prefix": "props",
+        "body": ["export type $1Props = {", "    $2: $3", "}"]
+    }
+}

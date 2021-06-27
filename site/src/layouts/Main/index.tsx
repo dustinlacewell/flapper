@@ -5,25 +5,22 @@
  * See: https://www.gatsbyjs.com/docs/use-static-query/
  */
 
-import * as React from "react"
+import React from "react"
 
 import PropTypes from "prop-types"
 
-import { Box  } from "@chakra-ui/layout";
+import { Header } from "@ui"
 
 import "@fontsource/fira-mono"
-
-import { Belt } from "../../components/Belt";
-import { Footer } from "../../components/Footer";
-import { Header } from "../../components/Header"
 
 import "./styles.scss";
 
 
+// eslint-disable-next-line unused-imports/no-unused-vars
 const Layout = ({ context, asset, children, ...props }) => {
-    const { menus } = context;
     return (
         <>
+            <Header context={context} asset={asset} />
             <main {...props}>
                 {children}
             </main>

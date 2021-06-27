@@ -1,11 +1,82 @@
 {
-  "files.exclude": {
-    "packages/gatsby-source-kontent/**/src/**/*.js": true,
-    "packages/gatsby-source-kontent/**/src/**/*.js.map": true,
-    "packages/gatsby-source-kontent/**/gatsby-node.js": true,
-    "packages/gatsby-source-kontent/**/gatsby-node.js.map": true,
-    "packages/gatsby-source-kontent/**/index.js": true,
-    "packages/gatsby-source-kontent/**/index.js.map": true,
-},
-"typescript.tsdk": "node_modules/typescript/lib"
+    // use workspace typescript
+    "typescript.tsdk": "./node_modules/typescript/lib",
+
+    // default linters
+    "[javascript]": {
+        "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    },
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    },
+    "[javascriptreact]": {
+        "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    },
+    "[typescript]": {
+        "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    },
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[jsonc]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "typescript.preferences.importModuleSpecifier": "non-relative",
+    "tsImportSorter.configuration.autoFormat": "off",
+
+    // disable vscode format on save
+    "editor.formatOnSave": false,
+
+    // eslint
+    "eslint.format.enable": true,
+    "eslint.lintTask.enable": true,
+    "editor.codeActionsOnSave": {
+        "source.addMissingImports": true,
+        "editor.action.formatDocument": true,
+        "source.fixAll": true
+    },
+    "eslint.validate": [
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact"
+    ],
+
+    // import grouping and sorting
+    "tsImportSorter.configuration.groupRules": [
+        "^react(-dom)?$",
+        {},
+        "^[@]",
+        "^[.]"
+    ],
+
+    // format command
+    "multiCommand.commands": [
+        {
+            "command": "multiCommand.formatAndfix",
+            "sequence": ["editor.action.formatDocument"]
+        }
+    ],
+
+    // local dictionary
+    "cSpell.words": [
+        "Boid",
+        "domview",
+        "useanimationframe",
+        "useengine",
+        "useentity",
+        "usefacet",
+        "usequery",
+        "usestatefulref",
+        "usesystem",
+        "usetimer"
+    ],
+    "files.exclude": {
+        "packages/gatsby-source-flapper/**/src/**/*.js": true,
+        "packages/gatsby-source-flapper/**/src/**/*.js.map": true,
+        "packages/gatsby-source-flapper/**/gatsby-node.js": true,
+        "packages/gatsby-source-flapper/**/gatsby-node.js.map": true,
+        "packages/gatsby-source-flapper/**/index.js": true,
+        "packages/gatsby-source-flapper/**/index.js.map": true
+    }
 }

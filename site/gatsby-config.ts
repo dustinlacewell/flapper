@@ -1,5 +1,8 @@
 import path from 'path';
 
+import stages from './gatsby-stages'
+
+
 const siteMetadata = {
     title: `flapper.ldlework.com`,
     description: `Alternative to GraphQL for Gatsby`,
@@ -12,6 +15,10 @@ const asset_plugins = [
     `gatsby-plugin-image`,
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
+    {
+        resolve: "gatsby-plugin-react-svg",
+        options: {rule: {include: /images/ }},
+    },
     {
         resolve: `gatsby-plugin-graphql-codegen`,
         options: {
@@ -51,6 +58,13 @@ const filesystem_plugins = [
             path: `${__dirname}/content/pages`,
         },
     },
+    {
+        resolve: `gatsby-source-filesystem`,
+        options: {
+            name: `docs`,
+            path: `${__dirname}/content/docs`,
+        },
+    },
 ]
 
 module.exports = {
@@ -82,6 +96,10 @@ module.exports = {
                 },
                 gatsbyRemarkPlugins: [
                     {resolve: `gatsby-remark-copy-linked-files`},
+                    {
+                        resolve: `gatsby-remark-autolink-headers`,
+                        options: {isIconAfterHeader: true},
+                    },
                     {resolve: 'gatsby-remark-local-videos'},
                     {
                         resolve: `gatsby-remark-images`,
@@ -90,6 +108,9 @@ module.exports = {
                 ],
             },
         },
-        "@kentico/gatsby-source-kontent",
+        {
+            resolve: "@flapper/gatsby-source-flapper",
+            options: { stages },
+        },
     ],
 }

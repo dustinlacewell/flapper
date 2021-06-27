@@ -1,0 +1,38 @@
+.landing {
+    justify-content: center;
+
+    & > .column {
+        max-width: 960px;
+
+        flex-grow: 1;
+        flex-direction: column;
+
+        .spacer {
+            flex-grow: 1;
+        }
+
+        .header {
+            .logo {
+                width: 512px;
+            }
+        }
+    }
+}
+
+@media (max-width: 970px) {
+    .hook {
+        width: 100%;
+
+        pre {
+            overflow-x: auto;
+        }
+    }
+
+    .spacer {
+        display: none;
+    }
+
+    .logo {
+        display: none;
+    }
+}
