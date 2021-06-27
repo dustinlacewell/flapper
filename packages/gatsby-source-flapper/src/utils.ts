@@ -20,6 +20,10 @@ Query extends ""
             ? DirParser<"", Result & Record<Rest, string>>
             : Result
 
+const escapeRegExp = (string) => {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+}
+
 export const parseQuery = (query) => {
     let regex = "";
 
@@ -31,7 +35,8 @@ export const parseQuery = (query) => {
             break;
         }
 
-        regex += `${data.pre}(?<${data.body}>[^/]+)`;
+        const escaped: string = escapeRegExp(data.pre);
+        regex += `${escaped}(?<${data.body}>[^/]+)`;
         query = data.post;
     }
 
