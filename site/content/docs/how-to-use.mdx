@@ -1,0 +1,103 @@
+---
+menu_label: How to Use
+sidebar_position: 3
+---
+
+# How is Flapper Used?
+
+Let's give a short example of how Flapper is used.
+
+## Adding Flapper to Gatsby
+
+In your `gatsby-config.js` import `gatsby-plan.js`:
+
+<Code language="javascript">{`import plan from 'gatsby-plan.js'`}</Code>
+
+Then pass the imported plan to the plugin:
+
+<Code language="javascript">
+    {`{
+    resolve: '@flapper/gatsby-source-flapper',
+    options: { plan },
+}`}
+</Code>
+
+## Creating the Build Plan
+
+Create a file `gatsby-plan.js` with the following content:
+
+<Code language="javascript">
+    {`const plan = {
+    'build-stage': {
+        'page': [ /* processors here */ ],
+    },
+}`}
+</Code>
+
+This defines:
+
+-   A single Stage, "`build-stage`"
+-   A single asset type, "`page`", with an empty pipeline
+
+### Reading in files
+
+Add the `MatchFiles` proc to the pipeline to read files from `src/pages/`:
+
+<Code language="javascript">
+    {`const plan = {
+    'build-stage': {
+        'page': [
+            MatchFiles('src/pages/{{slug}}.tsx'),
+        ],
+    },
+}`}
+</Code>
+
+This will create a `page` Asset for any file in the `src/pages/` directory. The filename will become the `.slug` property on each Asset.
+
+### Set the URL
+
+Add the `SetURL` proc to the pipeline to specify the output location of each `page` Asset:
+
+<Code language="javascript">
+    {`const plan = {
+    'build-stage': {
+        'page': [
+            MatchFiles('src/pages/{{slug}}.tsx'),
+            SetURL('/{{slug}}'),
+        ],
+    },
+}`}
+</Code>
+
+### Render the pages
+
+Finally, use the `RenderTemplate` proc to specify what file should be used as the template to render each `page` Asset. In this case, the original file itself will be used:
+
+<Code language="javascript">
+    {`const plan = {
+    'build-stage': {
+        'page': [
+            MatchFiles('src/pages/{{slug}}.tsx'),
+            SetURL('/{{slug}}'),
+            RenderTemplate('{{path}}'),
+        ],
+    },
+}`}
+</Code>
+
+Now we have a build plan that will:
+
+-   Read all `.tsx` files in the `src/pages/` directory as `page` Assets
+-   Use the filename/slug as the target URL
+-   Use the orignal `.tsx` file as the template for each `page` Asset
+
+## Creating Pages
+
+Create a file `src/pages/index.tsx` with the following content:
+
+<Code language="javascript">
+    {`export default function() {
+    return <h1>Hello World</h1>
+}`}
+</Code>

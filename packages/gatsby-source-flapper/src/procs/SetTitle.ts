@@ -1,11 +1,12 @@
 import { titleCase } from "title-case";
 
-import { DeriveFields } from ".";
 import {
     Asset,
     Context,
     Proc,
 } from "../types"
+
+import { DeriveFields } from ".";
 
 
 export const SetTitle: Proc = (src_attr: string, dst_attr = "title") => {

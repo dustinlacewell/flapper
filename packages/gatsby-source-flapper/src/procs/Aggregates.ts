@@ -1,7 +1,7 @@
 import Handlebars from 'handlebars';
 
-import { Asset,Proc } from '../types';
-import { get_value } from '../utils';
+import { Asset,Proc } from '@types';
+import { get_value } from '@utils';
 
 
 export const DeriveSimpleAggregate: Proc = (other_type: string, key: string, attr: string) => {
