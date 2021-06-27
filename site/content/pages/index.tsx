@@ -39,7 +39,7 @@ const page = SiteTemplate(({ context, asset }) => {
                             <Box margin="0" mb="1em" ml=".5em">
                                 A freeform alternative to GraphQL for Gatsby
                             </Box>
-                            <Box bg="rgb(39, 40, 34)" padding="1em" fontSize=".8em" fontFamily="monospace" margin="1em" borderRadius="5px" overflow="hidden">
+                            <Box className={styles.code}>
                                 <SyntaxHighlighter language="javascript" style={monokai}>
                                     {code_example}
                                 </SyntaxHighlighter>

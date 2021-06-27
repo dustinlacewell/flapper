@@ -1,8 +1,9 @@
 .landing {
     justify-content: center;
+    max-width: 960px;
 
     & > .column {
-        max-width: 960px;
+        max-width: 100%;
 
         flex-grow: 1;
         flex-direction: column;
@@ -19,15 +20,25 @@
     }
 }
 
-@media (max-width: 970px) {
-    .hook {
-        width: 100%;
+.code {
+    max-width: 90%;
+    padding: 1em;
+    margin: 1em;
+    border-radius: 5px;
 
-        pre {
-            overflow-x: auto;
-        }
+    background-color: rgb(39, 40, 34);
+
+    font-size: .8em;
+    font-family: monospace;
+}
+
+@media (max-width: 1100px) {
+    .code {
+        overflow-x: auto;
     }
+}
 
+@media (max-width: 970px) {
     .spacer {
         display: none;
     }
