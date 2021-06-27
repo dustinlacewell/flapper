@@ -2,10 +2,10 @@ import {
     AddMenu,
     AllFiles,
     BindMDX,
-    CreatePages,
     MakeMenu,
     MatchFiles,
     Menu,
+    RenderTemplate,
     SetRelativePath,
     SetTitle,
     SetURL,
@@ -39,10 +39,10 @@ const stages = {
     },
     'writing': {
         'docs-guide': [
-            CreatePages('src/templates/DocsPage/index.tsx'),
+            RenderTemplate('src/templates/DocsPage/index.tsx'),
         ],
         'page': [
-            CreatePages('{{path}}'),
+            RenderTemplate('{{path}}'),
         ],
     },
 }

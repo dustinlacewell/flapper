@@ -1,0 +1,27 @@
+---
+menu_label: Installation
+sidebar_position: 1
+---
+
+# Installing Flapper
+
+Flapper is a Gatsby plugin. This guide presumes you know how to setup and configure a Gatsby site.
+
+### Install Flapper from NPM
+
+<Code language="javascript">yarn add @flapper/gatsby-source-flapper</Code>
+
+### Add Flapper to `gatsby-config.js`
+
+Edit your `gatsby-config.js` and add the `@flapper/gatsby-source-flapper` plugin.
+
+It takes a `plan` option, which tells Flappy how to build your site.
+
+<Code>
+    {`{
+    resolve: "@flapper/gatsby-source-flapper",
+    options: { plan },
+}`}
+</Code>
+
+How to build your build `plan` will be described in the following sections.

@@ -1,18 +1,7 @@
 ---
-menu_label: Getting Started
-sidebar_position: 1
+menu_label: Overview
+sidebar_position: 2
 ---
-
-import SyntaxHighlighter from "react-syntax-highlighter"
-import { monokai } from "react-syntax-highlighter/dist/esm/styles/hljs"
-
-# Getting Started with Flapper
-
-In this guide, you'll learn how to integrate Flapper with Gatsby, get an overview of the core concepts, and build a simple blog.
-
-## Installation
-
-    TODO: Write installation guide
 
 ## How does Flapper work?
 
@@ -28,15 +17,27 @@ Instead of offering built-in metaphors like "pages", "posts", "categories" and "
 
 We'll go over each of these concepts in detail now.
 
-### Assets
+### Assets and Asset Types
 
-Plain ol javascript objects, with whatever data is useful.
+Assets are plain ol javascript objects, with whatever data is useful.
 
 Assets represent the individual items within some group of similar assets. These could represent static pages of your site, posts of a blog, but also software projects, your favorite movies, and whatever else.
 
 What data assets should have really comes down to what you want to display on your site, via your templates, and what data is needed to drive them.
 
-### Processor
+**Important Properties:**
+
+Assets have a few important properties:
+
+-   **target**: The path on disk / relative url of the Asset
+-   **id**: Automatically generated globally unique identifier
+-   **type**: Name of the Asset Type to which the Asset belongs
+
+**Asset Types:**
+
+Asset Types are simply named collections of similar Assets.
+
+### Processors
 
 Plain ol javascript functions, that modify Assets in whatever way is useful.
 
@@ -48,8 +49,8 @@ Need to convert a title into a slug? Need to associate an asset with other "rela
 
 Pipelines are where you define an Asset Type and the series of Processors that will build its Assets. Each Pipeline is an array of Processors. Each Stage is an object mapping named Pipelines. Multiple Stages are composed by name into a final parent object.
 
-<SyntaxHighlighter language="javascript" style={monokai}>{`
-const stages = {
+<Code language="javascript">
+    {`const stages = {
     'reading-stage': {
         'your-asset-name': [
             GetDataFromSource( ... ),
@@ -70,11 +71,19 @@ const stages = {
             RenderTemplate( ... ),
         ],
     },
-}
-`}</SyntaxHighlighter>
+}`}
+</Code>
 
 Stages and Pipelines are executed in the order they are defined. This structure defines the entire build process and allows for precise control over ordering where needed.
 
 There can be multiple Pipelines for the same Asset Type. In the example above, both Asset Types appear in both Stages. The Assets generated in the first stage carry over to the second.
 
 A good reason to use Stages to organize the ordering like this, is to ensure that all assets have received a URL by the time that template rendering happens. This guarantees that templates can render links to the Assets of any Asset Type.
+
+## Gatsby Integration
+
+Flapper implements the <Link to="https://www.gatsbyjs.com/docs/reference/config-files/gatsby-node/#createPages">createPages</Link> Gatsby API. This means that, during Gatsby's build process, when it is ready to render out pages, that is when Flappy jumps into action.
+
+Flappy runs your build plan and at some point you should use the `RenderTemplate` processor to turn your Assets into static HTML pages. Internally, `RenderTemplate` uses the Gatsby <Link to="https://www.gatsbyjs.com/docs/reference/config-files/actions/#createPage">createPage</Link> method.
+
+You can read more about this approach here: <Link to="https://www.gatsbyjs.com/docs/how-to/querying-data/using-gatsby-without-graphql/">Gatsby without GraphQL</Link>

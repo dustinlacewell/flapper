@@ -11,8 +11,9 @@ import { matchPaths, statFile } from '../utils'
 
 export const MatchFiles: Proc = <T extends string>(path: T) => {
     return async (context, type_name: string, assets: ContentType) => {
+        const cwd = process.cwd()
         console.log(`Matching files from: ${join(process.cwd(), path)}`)
-        const results = await matchPaths(process.cwd(), path)
+        const results = await matchPaths(cwd, path)
         for (const { path, meta } of results) {
             const stats = await statFile(path)
             const metadata = {
