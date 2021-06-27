@@ -20,18 +20,6 @@ Query extends ""
             ? DirParser<"", Result & Record<Rest, string>>
             : Result
 
-
-export const slash = input => {
-    const isExtendedLengthPath = /^\\\\\?\\/.test(input);
-    const hasNonAscii = /[^\u0000-\u0080]+/.test(input); // eslint-disable-line no-control-regex
-
-    if (isExtendedLengthPath || hasNonAscii) {
-        return input;
-    }
-
-    return input.replace(/\\/g, '/');
-};
-
 export const parseQuery = (query) => {
     let regex = "";
 
@@ -90,7 +78,7 @@ export const statFile = async (path: string) => {
 }
 
 export const matchPaths = async <T extends string>(root, query: T): Promise<PathMatchResult<T>[]> => {
-    const pattern = parseQuery(slash(path.join(root, query)));
+    const pattern = parseQuery(path.join(root, query));
     const files = await recursive(root);
 
     return files
