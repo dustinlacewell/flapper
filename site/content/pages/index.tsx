@@ -40,7 +40,7 @@ const page = SiteTemplate(({ context, asset }) => {
                                 A freeform alternative to GraphQL for Gatsby
                             </Box>
                             <Box className={styles.code}>
-                                <SyntaxHighlighter language="javascript" style={monokai}>
+                                <SyntaxHighlighter language="javascript" style={monokai} customStyle={{style: {overflowX: "inherit"}}}>
                                     {code_example}
                                 </SyntaxHighlighter>
                             </Box>

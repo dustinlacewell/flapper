@@ -1,9 +1,12 @@
+main {
+    max-width: 960px;
+}
+
 .landing {
     justify-content: center;
-    max-width: 960px;
+    max-width: 100%;
 
     & > .column {
-        max-width: 100%;
 
         flex-grow: 1;
         flex-direction: column;
