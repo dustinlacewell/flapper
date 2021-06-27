@@ -6,7 +6,7 @@ import Handlebars from 'handlebars';
 import { Proc } from '../types';
 
 
-export const CreatePages: Proc = (pattern: string) => {
+export const RenderTemplate: Proc = (pattern: string) => {
     const template = Handlebars.compile(pattern)
     return async (context, type, assets) => {
         const safeContext = {assets: {}, menus: context['menus'] }

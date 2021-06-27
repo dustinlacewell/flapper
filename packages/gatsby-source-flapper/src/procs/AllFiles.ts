@@ -9,11 +9,11 @@ import {
 import recursive from "recursive-readdir";
 
 import { Asset,Proc } from '../types';
-import { statFile } from '../utils';
+import { slash, statFile } from '../utils';
 
 
 export const AllFiles: Proc = (search_path: string, extensions: string[] = null) => {
-    const full_search_path = join(process.cwd(), search_path)
+    const full_search_path = slash(join(process.cwd(), search_path))
     return async (context, type_name, assets) => {
         const files = (await recursive(full_search_path))
             .map(path => ({
