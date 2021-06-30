@@ -1,12 +1,12 @@
 {
-  "name": "@kentico/kontent-gatsby-packages",
-  "description": "Monorepo containing Kentico Kontent packages for Gatsby.",
+  "name": "@flapper/monorepo",
+  "description": "Monorepo containing @Flapper packages and site.",
   "repository": "https://github.com/dustinlacewell/flapper.git",
   "homepage": "https://github.com/dustinlacewell/flapper#readme",
   "author": {
-    "name": "Ondřej Chrastina",
-    "email": "chrastina.ondra@gmail.com",
-    "url": "https://ondrej.chrastina.tech"
+    "name": "Dustin Lacewell",
+    "email": "dlacewell@gmail.com",
+    "url": "http://ldlework.com"
   },
   "license": "MIT",
   "private": true,
@@ -15,10 +15,11 @@
     "site"
   ],
   "scripts": {
+    "docs": "typedoc --json site/content/docs/typedoc.json --out /tmp/flapper --exclude \"**/graphql.ts\" --tsconfig packages/gatsby-source-flapper/tsconfig.json packages/gatsby-source-flapper/src/index.ts",
     "lint": "yarn workspaces run lint",
     "test": "yarn workspaces run test",
     "build": "yarn workspaces run build",
-    "build:source": "yarn workspace @flapper/gatsby-source-flapper build",
+    "build:source": "yarn workspace @flapper/gatsby-source-flapper build && yarn docs",
     "build:site": "yarn build:source && yarn build:components && yarn workspace @flapper/site build",
     "watch": "run-p watch:**",
     "prepublishOnly": "yarn build",

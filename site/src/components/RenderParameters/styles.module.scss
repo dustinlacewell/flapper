@@ -1,0 +1,31 @@
+.params {
+    display: flex;
+    flex-direction: column;
+
+    .param {
+        display: flex;
+        flex-direction: column;
+
+        .header {
+            display: flex;
+
+            .paramName {
+                font-weight: 700;
+            }
+
+            .paramType {
+                display: flex;
+                margin-left: 0.5em;
+                font-weight: lighter;
+
+                .defaultValue {
+                    font-style: normal;
+                }
+            }
+        }
+
+        .comment {
+            padding: 1em;
+        }
+    }
+}

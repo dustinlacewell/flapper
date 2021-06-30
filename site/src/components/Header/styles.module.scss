@@ -2,28 +2,26 @@
     padding: 0.5em 2em;
     display: flex;
     align-items: center;
+    height: 64px;
     border-bottom: 2px solid grey;
 
     .logo {
         display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-right: 1em;
 
-        & > div {
-            display: flex;
-            align-items: center;
-
-            & > div:first-child {
-                font-weight: 700;
-            }
-
-            & > div:last-child {
-                margin: 10px;
-                width: 32px;
-                height: 32px;
-            }
+        .logoTitle {
+            vertical-align: middle;
         }
     }
 
     .spacer {
         flex-grow: 1;
     }
+}
+
+.logoSVG {
+    width: 32px;
+    margin-right: 1em;
 }

@@ -1,0 +1,55 @@
+---
+menu_label: Assets
+sidebar_position: 5
+---
+
+# Assets
+
+Every Stage in your build plan is composed of one or more Asset Type pipelines:
+
+<Code language="javascript">
+    {`const plan = {
+    'my-stage': {
+        'my-asset-type': [
+            // processors
+        ],
+    },
+}`}
+</Code>
+
+The Asset Type is just a named collection of Assets, produced by the Processors.
+
+Each Asset is a javascript object with whatever metadata is helpful:
+
+<Code language="javascript">
+    {`{
+    id: "123e4567-e89b-12d3-a456-426614174000",
+    target: "pages/index.html",
+    sidebar_items: [
+        ['link1', 'https://example.com/'],
+        ['link2', 'https://example2.com/'],
+    ],
+}`}
+</Code>
+
+Within your templates, you'll be able to access your Asset Types and Assets:
+
+<Code language="typescript">
+    {`
+<div>
+    {asset.sidebar_items.map(([label, url]) =>
+        <a href={url}>{label}</a>
+    )}
+</div>
+`}
+</Code>
+
+## URL Targetting
+
+An asset's `.target` property is special.
+
+It is utilized by processors like `RenderTemplate` to know where an asset should be rendered to. Additionally, it is used by your templates/components to provide links to assets.
+
+The `.target` property should be set for any assets that will be involved in template rendering, before rendering happens.
+
+The `.target` property can be set using the `SetUrl` processor or any other method.

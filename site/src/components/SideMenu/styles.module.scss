@@ -1,11 +1,42 @@
 .sideMenu {
     flex-direction: column;
 
+    .title {
+        font-size: 1.3em;
+        cursor: pointer;
+    }
+
+    .open::before {
+        font-size: 0.6em;
+        content: "▼";
+        position: absolute;
+        left: 10px;
+        padding-top: 6px;
+    }
+
+    .closed::before {
+        font-size: 0.6em;
+        content: "►";
+        position: absolute;
+        left: 10px;
+        padding-top: 6px;
+    }
+
     .menuItem {
         display: flex;
+        font-size: 0.9em;
+
+        * {
+            font-weight: 100;
+            font-family: "Courier New", Courier, monospace !important;
+        }
     }
 
     .activeMenuItem {
-        text-decoration: underline;
+        &::before {
+            left: 10px;
+            position: absolute;
+            content: "•";
+        }
     }
 }

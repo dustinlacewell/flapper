@@ -1,0 +1,41 @@
+---
+menu_label: Global Context
+sidebar_position: 8
+---
+
+# The Global Context
+
+As Flapper executes your build plan, it maintains a global context object.
+
+This object contains all of the asset types:
+
+<Code language="javascript">
+    {`{
+    utils: // gatsby actions
+    assets: {
+        // asset types by name
+    }
+}`}
+</Code>
+
+## context.utils
+
+The `utils` context property contains the <Link to="https://www.gatsbyjs.com/docs/reference/config-files/actions/">Gatsby Actions</Link>. This contains helpers like the <Link to="https://www.gatsbyjs.com/docs/reference/config-files/actions/#createPage">createPage</Link> action, used by the `RenderTemplate` processor.
+
+## Initial Context
+
+You can provide additional context by passing an object to the `context` plugin option:
+
+<Code language="javascript">
+    {`{
+    resolve: '@flapper/gatsby-source-flapper',
+    options: {
+        plan, context: {
+            site_name: mysite.com,
+            email: me@email.com,
+        },
+    },
+}`}
+</Code>
+
+This data can then be accessed in your processors and templates.

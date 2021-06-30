@@ -1,0 +1,23 @@
+# RenderTemplate
+
+<Doc />
+<Proc />
+
+## Parameters
+
+<Params />
+
+## Example
+
+Create `page` from `.tsx` files in the `pages/` directory.
+
+The original file itself is used as its own template.
+
+```javascript
+{
+    'page': [
+        SourceMatchedFiles('pages/{{slug}}.tsx'),
+        RenderTemplate('{{path}}'),
+    ]
+}
+```

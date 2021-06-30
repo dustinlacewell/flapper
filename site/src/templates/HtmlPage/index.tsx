@@ -1,19 +1,16 @@
 import * as React from "react"
 
 import { SiteTemplate } from '@flapper/gatsby-source-flapper/src/SiteTemplate'
+import { MainLayout } from "@layouts"
 
-import Layout from "../../layouts/Main"
 
-
-const template = SiteTemplate(({ context, asset }) => {
+const HtmlPage = SiteTemplate(({ context, asset }) => {
     const html = {__html: asset.content}
     return (
-        <Layout context={context} asset={asset} >
+        <MainLayout context={context} asset={asset} >
             <div dangerouslySetInnerHTML={html} />
-        </Layout>
+        </MainLayout>
     )
 })
 
-
-export default template
-
+export default HtmlPage

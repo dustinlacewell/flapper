@@ -1,9 +1,8 @@
 import React from 'react'
 
-import { Link } from 'gatsby'
-
-import { Box } from '@chakra-ui/react'
+import { Box, Flex } from '@chakra-ui/react'
 import { CheckMenu } from '@flapper/gatsby-source-flapper/src/procs/MakeMenu'
+import { Link } from '@ui'
 
 import Logo from '../../images/flapper.svg'
 
@@ -11,30 +10,26 @@ import * as styles from './styles.module.scss'
 
 
 const HeaderItem = ({ label, path, active }) =>
-    <Box>
+    <Flex alignItems="center">
         <Link to={path}>
             {label}
         </Link>
         {active && <Box />}
-    </Box>
+    </Flex>
 
-const component = ({ context, asset }) => {
+export const Header = ({ context, asset }) => {
     return (
         <div className={styles.header}>
             <Link className={styles.logo} to="/">
-                <div>
-                    <div>Flapper</div>
-                    <div>
-                        <Logo />
-                    </div>
-                </div>
+                <div className={styles.logoTitle}>Flapper</div>
             </Link>
+            <div className={styles.logoSVG}>
+                <Logo />
+            </div>
             {context.menus.main.children.map(c =>
                 <HeaderItem label={c.label} path={c.asset_target} active={CheckMenu(c, asset.id)} />)}
             <div className={styles.spacer} />
-            <div>Github</div>
+            <Link to="https://github.com/dustinlacewell/flapper">github</Link>
         </div>
     )
 }
-
-export default component

@@ -1,6 +1,6 @@
 import path from 'path';
 
-import stages from './gatsby-stages'
+import plan from './gatsby-plan'
 
 
 const siteMetadata = {
@@ -9,16 +9,11 @@ const siteMetadata = {
     author: `@dustinlacewell`,
 }
 
-const asset_plugins = [
-    'gatsby-plugin-dts-css-modules',
-    `gatsby-plugin-react-helmet`,
-    `gatsby-plugin-image`,
-    `gatsby-plugin-sharp`,
-    `gatsby-transformer-sharp`,
-    {
-        resolve: "gatsby-plugin-react-svg",
-        options: {rule: {include: /images/ }},
-    },
+const metadata_plugins = [
+    'gatsby-plugin-react-helmet',
+]
+
+const graphql_plugins = [
     {
         resolve: `gatsby-plugin-graphql-codegen`,
         options: {
@@ -28,21 +23,21 @@ const asset_plugins = [
             ],
         },
     },
+]
+
+const image_plugins = [
+    `gatsby-plugin-image`,
+    `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`,
     {
-        resolve: `gatsby-plugin-manifest`,
-        options: {
-            name: `gatsby-starter-default`,
-            short_name: `starter`,
-            start_url: `/`,
-            background_color: `#663399`,
-            theme_color: `#663399`,
-            display: `minimal-ui`,
-            icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
-        },
+        resolve: "gatsby-plugin-react-svg",
+        options: {rule: {include: /images/ }},
     },
 ]
 
 const style_plugins = [
+    `gatsby-plugin-fontawesome-css`,
+    'gatsby-plugin-dts-css-modules',
     `@chakra-ui/gatsby-plugin`,
     {
         resolve: 'gatsby-plugin-sass',
@@ -50,7 +45,30 @@ const style_plugins = [
     },
 ]
 
+const typescript_plugins = [
+    {
+        resolve: `gatsby-plugin-alias-imports`,
+        options: {
+            alias: {
+                "@ui": path.resolve(__dirname, 'src/components'),
+                "@typedoc": path.resolve(__dirname, 'src/typedoc'),
+                "@layouts": path.resolve(__dirname, 'src/layouts'),
+                "@SiteTemplate": path.resolve(__dirname, 'src/templates/SiteTemplate'),
+                "@templates": path.resolve(__dirname, 'src/templates'),
+            },
+            extensions: ['ts', 'tsx', 'scss'],
+        },
+    },
+]
+
 const filesystem_plugins = [
+    {
+        resolve: `gatsby-source-filesystem`,
+        options: {
+            name: `images`,
+            path: `${__dirname}/src/images`,
+        },
+    },
     {
         resolve: `gatsby-source-filesystem`,
         options: {
@@ -67,50 +85,44 @@ const filesystem_plugins = [
     },
 ]
 
+const mdx_plugins = [
+    {
+        resolve: `gatsby-plugin-mdx`,
+        options: {
+            defaultLayouts: {
+                pages: require.resolve("./src/layouts/Main/index.tsx"),
+                default: require.resolve("./src/layouts/Main/index.tsx"),
+            },
+            gatsbyRemarkPlugins: [
+                {resolve: `gatsby-remark-copy-linked-files`},
+                {
+                    resolve: `gatsby-remark-autolink-headers`,
+                    options: {isIconAfterHeader: true},
+                },
+                {resolve: 'gatsby-remark-local-videos'},
+                {
+                    resolve: `gatsby-remark-images`,
+                    options: {maxWidth: 400},
+                },
+            ],
+        },
+    },
+]
+
 module.exports = {
     siteMetadata,
     flags: {PARALLEL_SOURCING: false},
     plugins: [
-        {
-            resolve: `gatsby-plugin-alias-imports`,
-            options: {
-                alias: {
-                    "@ui": path.resolve(__dirname, 'src/components'),
-                    "@layouts": path.resolve(__dirname, 'src/layouts'),
-                    "@SiteTemplate": path.resolve(__dirname, 'src/templates/SiteTemplate'),
-                    "@templates": path.resolve(__dirname, 'src/templates'),
-                },
-                extensions: ['ts', 'tsx', 'scss'],
-            },
-        },
-        `gatsby-plugin-fontawesome-css`,
-        ...asset_plugins,
+        ...typescript_plugins,
+        ...metadata_plugins,
+        ...graphql_plugins,
+        ...image_plugins,
         ...style_plugins,
         ...filesystem_plugins,
-        {
-            resolve: `gatsby-plugin-mdx`,
-            options: {
-                defaultLayouts: {
-                    pages: require.resolve("./src/layouts/Main/index.tsx"),
-                    default: require.resolve("./src/layouts/Main/index.tsx"),
-                },
-                gatsbyRemarkPlugins: [
-                    {resolve: `gatsby-remark-copy-linked-files`},
-                    {
-                        resolve: `gatsby-remark-autolink-headers`,
-                        options: {isIconAfterHeader: true},
-                    },
-                    {resolve: 'gatsby-remark-local-videos'},
-                    {
-                        resolve: `gatsby-remark-images`,
-                        options: {maxWidth: 400},
-                    },
-                ],
-            },
-        },
+        ...mdx_plugins,
         {
             resolve: "@flapper/gatsby-source-flapper",
-            options: { stages },
+            options: { plan },
         },
     ],
 }

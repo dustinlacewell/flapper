@@ -1,19 +1,13 @@
 import { v4 } from 'uuid';
 
 
-export class Asset {
-    public target: string = undefined;
-    public id: string;
+export type Asset = {
+    [key: string]: any
+}
 
-    constructor(
-        public source: string,
-        public content: string,
-        metadata: any,
-        public type = "Unidentified"
-    ) {
-        this.id = v4();
-        for (const [key, value] of Object.entries(metadata)) {
-            this[key] = value
-        }
+export const NewAsset = (type: string, meta: Asset) => {
+    return {
+        ...meta, type,
+        id: v4(),
     }
 }

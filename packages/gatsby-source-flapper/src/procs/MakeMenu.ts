@@ -1,6 +1,6 @@
 import Handlebars from 'handlebars'
 
-import { Asset, Proc } from '../types';
+import { Asset, Processor } from '@types';
 
 
 export class Menu {
@@ -92,7 +92,29 @@ export const AddMenu = (context, new_menu) => {
     }
 }
 
-export const MakeMenu: Proc = (name: string, parent: string = null, label: string = '', priority: number = 0) => {
+export const CheckMenu = (menu, asset_id) => {
+    if (menu.asset_id === asset_id) {
+        return true
+    }
+    for (const child of menu.children) {
+        if (CheckMenu(child, asset_id)) {
+            return true
+        }
+    }
+
+    return false
+}
+
+/**
+ *
+ * Creates a Menu node in the menu graph.
+ *
+ * @param name Name of the new Menu node.
+ * @param parent Name of the parent Menu node.
+ * @param label Display label for the Menu node.
+ * @param priority Ordering priority among sibling nodes.
+ */
+export const MakeMenu = (name: string, parent: string = null, label: string = '', priority: number = 0): Processor => {
     const name_template = Handlebars.compile(name)
     const parent_template = Handlebars.compile(parent || '')
     const label_template = Handlebars.compile(label || '')
@@ -115,17 +137,4 @@ export const MakeMenu: Proc = (name: string, parent: string = null, label: strin
             AddMenu(context, menu)
         }
     }
-}
-
-export const CheckMenu = (menu, asset_id) => {
-    if (menu.asset_id === asset_id) {
-        return true
-    }
-    for (const child of menu.children) {
-        if (CheckMenu(child, asset_id)) {
-            return true
-        }
-    }
-
-    return false
 }

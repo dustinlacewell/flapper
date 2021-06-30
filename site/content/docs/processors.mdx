@@ -1,0 +1,70 @@
+---
+menu_label: Processors
+sidebar_position: 7
+---
+
+# Processors
+
+The processors added to your asset pipelines are simple functions that:
+
+-   Create new assets in the asset type
+-   Modify assets in the asset type
+
+Each processor is an async function:
+
+<Code language="javascript">
+    {`async function MyProcessor(context, type, assets) {
+    // add to assets
+    // OR
+    // modify the assets
+}`}
+</Code>
+
+## Processor Parameters
+
+Processors receive three parameters:
+
+-   `context`: The current global site context
+-   `type`: The name of the current asset type
+-   `assets`: The array of assets associated with the asset type
+
+## Types of Processors
+
+All processors work the same way, but they have different uses.
+
+-   Processors like `SourceFilesRecursively`/`SourceMatchedFiles` populate an asset type with assets based on files on disk.
+-   Processors like `SetTitle`/`SetUrl` modify existing assets with additional metadata.
+-   Processors like `RenderTemplate` write static HTML files for each asset.
+
+Other Processors are even more fancy like the `DeriveAggregateType` asset which produces assets based on the assets of another type.
+
+You can easily write a Processor function to do whatever you need, and use it within your pipelines.
+
+## Processor Factories
+
+Most built-in processors are actually functions which return a processor function.
+
+This allows you to configure the processor from your plan:
+
+<Code language="javascript">
+    {`function MyProcessor(option) {
+    return async (context, type, assets) => {
+        // use option
+    }
+}`}
+</Code>
+<Code language="javascript">
+    {`'my-asset-type': [
+    MyProcessor(true),
+]`}
+</Code>
+
+## Anonymous Processors
+
+You can of course also write anonymous processors in your plan:
+
+<Code language="javascript">
+    {`'my-asset-type': [
+    (context, type, assets) => { /* do stuff here */ },
+]`}
+</Code>

@@ -1,0 +1,24 @@
+# BindMdx
+
+<Doc />
+<Proc />
+
+## Parameters
+
+<Params />
+
+## Requirements
+
+`BindMdx` requires that you use <Link to="https://www.gatsbyjs.com/plugins/gatsby-plugin-mdx/">gatsby-plugin-mdx</Link>.
+
+The `pattern` parameter should resolve the filename of an MDX file that was processed by `gatsby-plugin-mdx`.
+
+## Usage
+
+For assets bound to MDX, you can use their `.mdx` fields with the <Link to="https://www.gatsbyjs.com/plugins/gatsby-plugin-mdx/#mdxprovider">MDXProvider</Link> and <Link to ="https://www.gatsbyjs.com/plugins/gatsby-plugin-mdx/#mdxrenderer">MDXRenderer</Link> components from your templates.
+
+```javascript
+<MDXProvider>
+    <MDXRenderer>{asset.mdx.body}</MDXRenderer>
+</MDXProvider>
+```

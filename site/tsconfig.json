@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "target": "esnext",
+        "target": "es2020",
         "lib": ["es6", "dom", "dom.iterable"],
         "module": "commonjs",
         "moduleResolution": "node",
@@ -13,6 +13,7 @@
         "baseUrl": ".",
         "paths": {
             "@ui": ["src/components"],
+            "@typedoc": ["src/typedoc"],
             "@layouts": ["src/layouts"],
             "@SiteTemplate": ["src/templates/SiteTemplate"],
             "@templates": ["src/templates"]

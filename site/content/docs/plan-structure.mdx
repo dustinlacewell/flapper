@@ -1,0 +1,35 @@
+---
+menu_label: Plan Structure
+sidebar_position: 4
+---
+
+# Plan Structure
+
+The object passed to the Flapper plugin's `plan` option has a specific structure:
+
+<Code language="javascript">
+    {`const plan = {
+    'stage-1': {
+        'asset-type-a': [
+            // processors
+        ],
+        'asset-type-b': [
+            // processors
+        ],
+    },
+    'stage-2': {
+        'asset-type-a': [
+            // processors
+        ],
+        'asset-type-c': [
+            // processors
+        ],
+    },
+}`}
+</Code>
+
+Every top-level property in the Plan is the name of a Stage.
+
+Every top-level property of a Stage is the name of an Asset Type.
+
+The plan is executed in the order in which the Stages and Asset Type pipelines are defined.

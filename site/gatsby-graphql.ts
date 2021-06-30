@@ -653,28 +653,16 @@ export type SitePlugin = Node & {
 export type SitePluginPluginOptions = {
   alias?: Maybe<SitePluginPluginOptionsAlias>;
   extensions?: Maybe<Array<Maybe<Scalars['String']>>>;
-  namedExport?: Maybe<Scalars['Boolean']>;
-  banner?: Maybe<Scalars['String']>;
+  fileName?: Maybe<Scalars['String']>;
+  documentPaths?: Maybe<Array<Maybe<Scalars['String']>>>;
   base64Width?: Maybe<Scalars['Int']>;
   stripMetadata?: Maybe<Scalars['Boolean']>;
   defaultQuality?: Maybe<Scalars['Int']>;
   failOnError?: Maybe<Scalars['Boolean']>;
-  fileName?: Maybe<Scalars['String']>;
-  documentPaths?: Maybe<Array<Maybe<Scalars['String']>>>;
-  name?: Maybe<Scalars['String']>;
-  short_name?: Maybe<Scalars['String']>;
-  start_url?: Maybe<Scalars['String']>;
-  background_color?: Maybe<Scalars['String']>;
-  theme_color?: Maybe<Scalars['String']>;
-  display?: Maybe<Scalars['String']>;
-  icon?: Maybe<Scalars['String']>;
-  legacy?: Maybe<Scalars['Boolean']>;
-  theme_color_in_head?: Maybe<Scalars['Boolean']>;
-  cache_busting_mode?: Maybe<Scalars['String']>;
-  crossOrigin?: Maybe<Scalars['String']>;
-  include_favicon?: Maybe<Scalars['Boolean']>;
-  cacheDigest?: Maybe<Scalars['String']>;
+  namedExport?: Maybe<Scalars['Boolean']>;
+  banner?: Maybe<Scalars['String']>;
   additionalData?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
   path?: Maybe<Scalars['String']>;
   defaultLayouts?: Maybe<SitePluginPluginOptionsDefaultLayouts>;
   gatsbyRemarkPlugins?: Maybe<Array<Maybe<SitePluginPluginOptionsGatsbyRemarkPlugins>>>;
@@ -689,6 +677,7 @@ export type SitePluginPluginOptions = {
 
 export type SitePluginPluginOptionsAlias = {
   _ui?: Maybe<Scalars['String']>;
+  _typedoc?: Maybe<Scalars['String']>;
   _layouts?: Maybe<Scalars['String']>;
   _SiteTemplate?: Maybe<Scalars['String']>;
   _templates?: Maybe<Scalars['String']>;
@@ -2044,28 +2033,16 @@ export type SitePluginFilterInput = {
 export type SitePluginPluginOptionsFilterInput = {
   alias?: Maybe<SitePluginPluginOptionsAliasFilterInput>;
   extensions?: Maybe<StringQueryOperatorInput>;
-  namedExport?: Maybe<BooleanQueryOperatorInput>;
-  banner?: Maybe<StringQueryOperatorInput>;
+  fileName?: Maybe<StringQueryOperatorInput>;
+  documentPaths?: Maybe<StringQueryOperatorInput>;
   base64Width?: Maybe<IntQueryOperatorInput>;
   stripMetadata?: Maybe<BooleanQueryOperatorInput>;
   defaultQuality?: Maybe<IntQueryOperatorInput>;
   failOnError?: Maybe<BooleanQueryOperatorInput>;
-  fileName?: Maybe<StringQueryOperatorInput>;
-  documentPaths?: Maybe<StringQueryOperatorInput>;
-  name?: Maybe<StringQueryOperatorInput>;
-  short_name?: Maybe<StringQueryOperatorInput>;
-  start_url?: Maybe<StringQueryOperatorInput>;
-  background_color?: Maybe<StringQueryOperatorInput>;
-  theme_color?: Maybe<StringQueryOperatorInput>;
-  display?: Maybe<StringQueryOperatorInput>;
-  icon?: Maybe<StringQueryOperatorInput>;
-  legacy?: Maybe<BooleanQueryOperatorInput>;
-  theme_color_in_head?: Maybe<BooleanQueryOperatorInput>;
-  cache_busting_mode?: Maybe<StringQueryOperatorInput>;
-  crossOrigin?: Maybe<StringQueryOperatorInput>;
-  include_favicon?: Maybe<BooleanQueryOperatorInput>;
-  cacheDigest?: Maybe<StringQueryOperatorInput>;
+  namedExport?: Maybe<BooleanQueryOperatorInput>;
+  banner?: Maybe<StringQueryOperatorInput>;
   additionalData?: Maybe<StringQueryOperatorInput>;
+  name?: Maybe<StringQueryOperatorInput>;
   path?: Maybe<StringQueryOperatorInput>;
   defaultLayouts?: Maybe<SitePluginPluginOptionsDefaultLayoutsFilterInput>;
   gatsbyRemarkPlugins?: Maybe<SitePluginPluginOptionsGatsbyRemarkPluginsFilterListInput>;
@@ -2080,6 +2057,7 @@ export type SitePluginPluginOptionsFilterInput = {
 
 export type SitePluginPluginOptionsAliasFilterInput = {
   _ui?: Maybe<StringQueryOperatorInput>;
+  _typedoc?: Maybe<StringQueryOperatorInput>;
   _layouts?: Maybe<StringQueryOperatorInput>;
   _SiteTemplate?: Maybe<StringQueryOperatorInput>;
   _templates?: Maybe<StringQueryOperatorInput>;
@@ -2220,32 +2198,21 @@ export type SitePageFieldsEnum =
   | 'pluginCreator___name'
   | 'pluginCreator___version'
   | 'pluginCreator___pluginOptions___alias____ui'
+  | 'pluginCreator___pluginOptions___alias____typedoc'
   | 'pluginCreator___pluginOptions___alias____layouts'
   | 'pluginCreator___pluginOptions___alias____SiteTemplate'
   | 'pluginCreator___pluginOptions___alias____templates'
   | 'pluginCreator___pluginOptions___extensions'
-  | 'pluginCreator___pluginOptions___namedExport'
-  | 'pluginCreator___pluginOptions___banner'
+  | 'pluginCreator___pluginOptions___fileName'
+  | 'pluginCreator___pluginOptions___documentPaths'
   | 'pluginCreator___pluginOptions___base64Width'
   | 'pluginCreator___pluginOptions___stripMetadata'
   | 'pluginCreator___pluginOptions___defaultQuality'
   | 'pluginCreator___pluginOptions___failOnError'
-  | 'pluginCreator___pluginOptions___fileName'
-  | 'pluginCreator___pluginOptions___documentPaths'
-  | 'pluginCreator___pluginOptions___name'
-  | 'pluginCreator___pluginOptions___short_name'
-  | 'pluginCreator___pluginOptions___start_url'
-  | 'pluginCreator___pluginOptions___background_color'
-  | 'pluginCreator___pluginOptions___theme_color'
-  | 'pluginCreator___pluginOptions___display'
-  | 'pluginCreator___pluginOptions___icon'
-  | 'pluginCreator___pluginOptions___legacy'
-  | 'pluginCreator___pluginOptions___theme_color_in_head'
-  | 'pluginCreator___pluginOptions___cache_busting_mode'
-  | 'pluginCreator___pluginOptions___crossOrigin'
-  | 'pluginCreator___pluginOptions___include_favicon'
-  | 'pluginCreator___pluginOptions___cacheDigest'
+  | 'pluginCreator___pluginOptions___namedExport'
+  | 'pluginCreator___pluginOptions___banner'
   | 'pluginCreator___pluginOptions___additionalData'
+  | 'pluginCreator___pluginOptions___name'
   | 'pluginCreator___pluginOptions___path'
   | 'pluginCreator___pluginOptions___defaultLayouts___pages'
   | 'pluginCreator___pluginOptions___defaultLayouts___default'
@@ -2961,32 +2928,21 @@ export type SitePluginFieldsEnum =
   | 'name'
   | 'version'
   | 'pluginOptions___alias____ui'
+  | 'pluginOptions___alias____typedoc'
   | 'pluginOptions___alias____layouts'
   | 'pluginOptions___alias____SiteTemplate'
   | 'pluginOptions___alias____templates'
   | 'pluginOptions___extensions'
-  | 'pluginOptions___namedExport'
-  | 'pluginOptions___banner'
+  | 'pluginOptions___fileName'
+  | 'pluginOptions___documentPaths'
   | 'pluginOptions___base64Width'
   | 'pluginOptions___stripMetadata'
   | 'pluginOptions___defaultQuality'
   | 'pluginOptions___failOnError'
-  | 'pluginOptions___fileName'
-  | 'pluginOptions___documentPaths'
-  | 'pluginOptions___name'
-  | 'pluginOptions___short_name'
-  | 'pluginOptions___start_url'
-  | 'pluginOptions___background_color'
-  | 'pluginOptions___theme_color'
-  | 'pluginOptions___display'
-  | 'pluginOptions___icon'
-  | 'pluginOptions___legacy'
-  | 'pluginOptions___theme_color_in_head'
-  | 'pluginOptions___cache_busting_mode'
-  | 'pluginOptions___crossOrigin'
-  | 'pluginOptions___include_favicon'
-  | 'pluginOptions___cacheDigest'
+  | 'pluginOptions___namedExport'
+  | 'pluginOptions___banner'
   | 'pluginOptions___additionalData'
+  | 'pluginOptions___name'
   | 'pluginOptions___path'
   | 'pluginOptions___defaultLayouts___pages'
   | 'pluginOptions___defaultLayouts___default'
@@ -3038,4 +2994,4 @@ export type SitePluginSortInput = {
 export type Unnamed_1_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_1_Query = { site?: Maybe<{ siteMetadata?: Maybe<Pick<SiteSiteMetadata, 'title' | 'description' | 'author'>> }> };
+export type Unnamed_1_Query = { allFile: { nodes: Array<Pick<File, 'publicURL'>> } };

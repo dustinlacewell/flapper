@@ -1,7 +1,7 @@
-export * from './Anchor';
-export * from './Belt';
-export { default as Header } from './Header';
+export * from './Head';
+export * from './Header';
 export * from './Link';
-export { default as MDXInsert } from './MDXInsert';
-export { default as seo } from './seo';
-export { default as SideMenu } from './SideMenu';
+export * from './MDXInsert';
+export * from './RenderFunction';
+export * from './RenderParameters';
+export * from './SideMenu';

@@ -1,9 +1,8 @@
-import React from "react"
-
-import { Link } from "gatsby"
+import React, { useEffect, useState } from "react"
 
 import { Box, Flex } from "@chakra-ui/react"
 import { CheckMenu } from "@flapper/gatsby-source-flapper/src/procs/MakeMenu"
+import { Link } from "@ui"
 
 import * as styles from './styles.module.scss'
 
@@ -15,14 +14,21 @@ const MenuItem = ({ label, path, active }) =>
         </Link>
     </Box>
 
-const component = ({ menu_name, context, asset }) => {
+export const SideMenu = ({ title, menu_name, context, asset }) => {
+    const [open, setOpen] = useState(false)
+
+    useEffect(() => {
+        setOpen(open || CheckMenu(context.menus[menu_name], asset.id))
+    }, [])
+
     return (
         <Flex className={styles.sideMenu}>
-            {context.menus[menu_name].children.map(c =>
+            <Box className={`${styles.title} ${open ? styles.open : styles.closed}`} onClick={() => setOpen(!open)}>
+                {title}
+            </Box>
+            {open && context.menus[menu_name].children.map(c =>
                 <MenuItem label={c.label} path={c.asset_target} active={CheckMenu(c, asset.id)} />
             )}
         </Flex>
     )
 }
-
-export default component

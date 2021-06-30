@@ -1,18 +1,28 @@
 
-import { Context, Stages } from "./src/types"
+import { Context, Plan } from "./src/types"
 import { CreatePageUtils } from "./src/utils";
 
 
-export const createPages = async (createPageUtils: CreatePageUtils, pluginOptions: { stages: Stages, finalizer: (context: Context) => void}) => {
-    const context = new Context(createPageUtils);
+type PluginOptions = {
+    plan: Plan,
+    context: { [key: string]: any },
+}
 
-    for (const [stage_name, pipeline] of Object.entries(pluginOptions.stages)) {
+export const createPages = async (createPageUtils: CreatePageUtils, pluginOptions: PluginOptions) => {
+    const context = new Context(createPageUtils);
+    if (pluginOptions.context) {
+        for (const [key, value] of Object.entries(pluginOptions.context)) {
+            context[key] = value
+        }
+    }
+
+    for (const [stage_name, pipeline] of Object.entries(pluginOptions.plan)) {
         console.log(`>>> ${stage_name}`)
         for (const [asset_type, procs] of Object.entries(pipeline)) {
             console.log(`   - ${asset_type}`)
             if (asset_type.startsWith('@')) {
                 for (const proc of procs) {
-                    await proc(context)
+                    await proc(context, null, null)
                 }
             } else {
                 const assets = context.getAssetType(asset_type)

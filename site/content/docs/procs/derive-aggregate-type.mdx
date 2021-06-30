@@ -1,0 +1,30 @@
+# DeriveAggregateType
+
+<Doc />
+<Proc />
+
+## Parameters
+
+<Params />
+
+## Example
+
+A `category` asset type is derived from the `project` asset type.
+
+`category` assets will be created for each group of `project` assets that have the same `.category_name` field.
+
+Every `project` asset will get a `.category` field pointing to the `category` asset it belongs to.
+
+Every `category` asset will have a `.assets` field, with all the `project` assets belonging to it.
+
+```javascript
+{
+  'category': [
+    DeriveSimpleAggregate(
+      'project',      // target asset type
+      'category',     // target asset field
+      'category_name' // source asset field
+    ),
+  ],
+}
+```

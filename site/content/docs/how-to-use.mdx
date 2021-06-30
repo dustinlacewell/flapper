@@ -3,9 +3,9 @@ menu_label: How to Use
 sidebar_position: 3
 ---
 
-# How is Flapper Used?
+# How do I use Flapper?
 
-Let's give a short example of how Flapper is used.
+Let's build a simple site with an `/` index page and `/about` page.
 
 ## Adding Flapper to Gatsby
 
@@ -27,7 +27,7 @@ Then pass the imported plan to the plugin:
 Create a file `gatsby-plan.js` with the following content:
 
 <Code language="javascript">
-    {`const plan = {
+    {`module.exports = {
     'build-stage': {
         'page': [ /* processors here */ ],
     },
@@ -36,35 +36,35 @@ Create a file `gatsby-plan.js` with the following content:
 
 This defines:
 
--   A single Stage, "`build-stage`"
+-   A single stage, "`build-stage`"
 -   A single asset type, "`page`", with an empty pipeline
 
 ### Reading in files
 
-Add the `MatchFiles` proc to the pipeline to read files from `src/pages/`:
+Add the `SourceMatchedFiles` processor to the pipeline to read files from `src/pages/`:
 
 <Code language="javascript">
     {`const plan = {
     'build-stage': {
         'page': [
-            MatchFiles('src/pages/{{slug}}.tsx'),
+            SourceMatchedFiles('src/pages/{{slug}}.tsx'),
         ],
     },
 }`}
 </Code>
 
-This will create a `page` Asset for any file in the `src/pages/` directory. The filename will become the `.slug` property on each Asset.
+This will create a `page` asset for any file in the `src/pages/` directory. The filename will become the `.slug` property on each asset.
 
 ### Set the URL
 
-Add the `SetURL` proc to the pipeline to specify the output location of each `page` Asset:
+Add the `SetUrl` processor to the pipeline to specify the output location of each `page` asset:
 
 <Code language="javascript">
     {`const plan = {
     'build-stage': {
         'page': [
-            MatchFiles('src/pages/{{slug}}.tsx'),
-            SetURL('/{{slug}}'),
+            SourceMatchedFiles('src/pages/{{slug}}.tsx'),
+            SetUrl('/{{slug}}'),
         ],
     },
 }`}
@@ -72,14 +72,14 @@ Add the `SetURL` proc to the pipeline to specify the output location of each `pa
 
 ### Render the pages
 
-Finally, use the `RenderTemplate` proc to specify what file should be used as the template to render each `page` Asset. In this case, the original file itself will be used:
+Finally, use the `RenderTemplate` processor to specify what file should be used as the template to render each `page` asset. In this case, the original file itself will be used:
 
 <Code language="javascript">
     {`const plan = {
     'build-stage': {
         'page': [
-            MatchFiles('src/pages/{{slug}}.tsx'),
-            SetURL('/{{slug}}'),
+            SourceMatchedFiles('src/pages/{{slug}}.tsx'),
+            SetUrl('/{{slug}}'),
             RenderTemplate('{{path}}'),
         ],
     },
@@ -88,9 +88,9 @@ Finally, use the `RenderTemplate` proc to specify what file should be used as th
 
 Now we have a build plan that will:
 
--   Read all `.tsx` files in the `src/pages/` directory as `page` Assets
+-   Read all `.tsx` files in the `src/pages/` directory as `page` assets
 -   Use the filename/slug as the target URL
--   Use the orignal `.tsx` file as the template for each `page` Asset
+-   Use the orignal `.tsx` file as the template for each `page` asset
 
 ## Creating Pages
 
@@ -101,3 +101,27 @@ Create a file `src/pages/index.tsx` with the following content:
     return <h1>Hello World</h1>
 }`}
 </Code>
+
+Create a second file `src/pages/about.tsx`:
+
+<Code language="javascript-react">
+    {`export default function() {
+    return <h1>About page</h1>
+}`}
+</Code>
+
+## Building the Site
+
+When you build your Gatsby site, Flapper will do the following:
+
+-   Run each Stage in the Plan
+    -   In this case there is just a single stage `build-stage`.
+-   Create each Asset Type Pipeline
+    -   In this case there is just a single asset type `page`.
+-   Run each Processor:
+
+1.  `SourceMatchedFiles` will create a `page` asset for each file in the `src/pages/` directory. `SourceMatchedFiles` can extract values from the paths it matches as asset properties. In this case, the filename is taken as the `.slug` property.
+2.  `SetUrl` will set the `target` property of each asset based on the `.slug` property. `SetUrl` by default snips URLs ending in `/index` to `/`.
+3.  `RenderTemplate` renders a static HTML page for each `page` asset. The template is taken to be the `.path` property, which is the absolute path of the originating source file. In this case, a `.tsx` file.
+
+You should now be able to visit the `/` and `/about` URLS.

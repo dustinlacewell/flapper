@@ -1,0 +1,79 @@
+---
+menu_label: How it Works
+sidebar_position: 2
+---
+
+# How does Flapper work?
+
+Flapper works by following a **plan** to build your site.
+
+**Major concepts**:
+
+-   **Assets**: Bags of metadata
+-   **Asset Types**: A group of assets
+-   **Proccesor**: Functions which create or update assets
+-   **Pipeline**: A list of processors run in sequence
+-   **Stage**: A group of pipelines run in sequence
+
+Your job is to:
+
+-   Define some asset types
+-   Populate them with assets using processor pipelines
+-   Map asset types to URLs and Templates
+
+<Code language="javascript">
+    {`const plan = {
+    'stage-1': {
+        'asset-type-a': [
+            // processors
+        ],
+        'asset-type-b': [
+            // processors
+        ],
+    },
+    'stage-2': {
+        'asset-type-a': [
+            // processors
+        ],
+        'asset-type-c': [
+            // processors
+        ],
+    },
+}`}
+</Code>
+
+Flapper then follows this plan to generate your static site.
+
+## Assets and Asset Types
+
+Plain ol javascript objects, that act as bags of metadata.
+
+Assets represent the individual items within some group of similar assets called an "asset type". These could represent pages of your site, posts of a blog, but also software projects, your favorite movies, and whatever else.
+
+What assets you need really comes down to what you want to display on your site.
+
+## Processors
+
+Plain ol javascript functions, that create or modify assets.
+
+Want to source data from a JSON file? Need to convert a title into a slug? Need to associate an asset with another? Whatever processing of asset data you need to do, you do it within processor functions.
+
+## Pipelines and Stages
+
+Pipelines and stages allow you to organize and order your plan.
+
+Each pipeline names an asset type, and any number of processor functions.
+
+Each stage contains any number of pipelines.
+
+Flapper will execute each stage and the pipelines within it, in the order they are defined.
+
+An asset type may appear in multiple pipelines. There's no need to do all the processing of a given asset type in a single pipeline.
+
+## Gatsby Integration
+
+Flapper implements the <Link to="https://www.gatsbyjs.com/docs/reference/config-files/gatsby-node/#createPages">createPages</Link> Gatsby API. This means that, during Gatsby's build process, when it is ready to render out pages, that is when Flapper jumps into action.
+
+Flapper runs your build plan and at some point you should use the `RenderTemplate` processor to turn your Assets into static HTML pages. Internally, `RenderTemplate` uses the Gatsby <Link to="https://www.gatsbyjs.com/docs/reference/config-files/actions/#createPage">createPage</Link> method.
+
+You can read more about this approach here: <Link to="https://www.gatsbyjs.com/docs/how-to/querying-data/using-gatsby-without-graphql/">Gatsby without GraphQL</Link>

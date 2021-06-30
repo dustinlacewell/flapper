@@ -1,6 +1,5 @@
-import { CreatePageUtils } from "../utils";
-
-import { ContentType } from ".";
+import { ContentType } from "@types";
+import { CreatePageUtils } from "@utils";
 
 
 export class Context extends Map<string, any> {

@@ -1,12 +1,20 @@
 import path from 'path';
 
-import { stringify} from 'flatted';
+import { stringify } from 'flatted';
 import Handlebars from 'handlebars';
 
-import { Proc } from '../types';
+import { Processor } from '@types';
 
 
-export const RenderTemplate: Proc = (pattern: string) => {
+/**
+ *
+ * Renders the evaluated template for each asset to static HTML.
+ *
+ * Assets should have a valid `.target` field.
+ *
+ * @param pattern Should evaluate to the filename of a template.
+ */
+export const RenderTemplate = (pattern: string): Processor => {
     const template = Handlebars.compile(pattern)
     return async (context, type, assets) => {
         const safeContext = {assets: {}, menus: context['menus'] }

@@ -4,6 +4,7 @@
     h1,
     h2,
     h3 {
+        overflow-wrap: anywhere;
         line-height: 1em;
         display: inline-block;
         margin-bottom: 25px;
@@ -23,21 +24,45 @@
         margin-top: 25px;
     }
 
-    ul {
+    ul,
+    ol {
         margin-left: 1.5em;
-        margin-bottom: 2em;
+        margin-bottom: 1em;
     }
 
     p,
     pre {
         margin-bottom: 1.2em;
-        // max-width: 960px;
+        max-width: 100%;
+        width: 100%;
+
+        @media (min-width: 800px) {
+            width: 700px;
+        }
+    }
+
+    pre {
+        padding: 1em !important;
+        border-radius: 8px;
+    }
+
+    p code,
+    ul code,
+    ol code {
+        background-color: #f1f1f1;
+        border-radius: 3px;
+        padding: 0px 2px;
     }
 
     .content {
-        flex-grow: 1;
+        flex-grow: 0;
         flex-shrink: 1;
-        // max-width: 1024px;
+        width: calc(100% - 180px - 32px);
+        max-width: 700px;
+
+        @media (max-width: 700px) {
+            width: 100%;
+        }
 
         h3 {
             font-size: 1.5em;
@@ -49,5 +74,42 @@
         flex-shrink: 0;
         padding-top: 1em;
         margin-right: 3em;
+        width: 180px;
+
+        @media (max-width: 700px) {
+            display: none;
+        }
+    }
+
+    .toc {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        flex-grow: 1;
+        flex-shrink: 1;
+
+        margin-left: 3em;
+
+        & > * {
+            margin-bottom: 0.5em;
+        }
+
+        .level1 {
+            font-size: 1.3em !important;
+        }
+
+        .level2 {
+            font-size: 1em !important;
+            margin-left: 1em;
+        }
+
+        .level3 {
+            font-size: 0.8em !important;
+            margin-left: 2em;
+        }
+
+        @media (max-width: 1256px) {
+            display: none;
+        }
     }
 }

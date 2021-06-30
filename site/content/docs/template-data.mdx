@@ -1,0 +1,32 @@
+---
+menu_label: Template Data
+sidebar_position: 9
+---
+
+# Template Data
+
+While running your build plan, Flapper is accumulating all your asset and other context data. When it comes time to render templates to HTML, this data needs to be passed to the templates.
+
+To send your data to the templates, _Gatsby requires that data be serializable to JSON_.
+
+This means your context and asset data cannot contain functions.
+
+Usually this would also mean that your data cannot contain circular references.
+
+Flapper takes care of this under the hood with the `SiteTemplate` component.
+
+## SiteTemplate
+
+In order for your templates to receive data from Flapper, you must wrap your template in the `SiteTemplate` component.
+
+Your component can then take the `context` and `asset` props:
+
+<Code language="javascript">
+    {`const template = ({context, asset}) =>
+    <div>
+        <h1>{context.site_name}</h1>
+        <h2>{asset.title}</h2>
+        <p>{asset.content}</p>
+    </div>
+exports.default = SiteTemplate(template)`}
+</Code>

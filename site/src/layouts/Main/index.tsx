@@ -1,33 +1,32 @@
-/**
- * Layout component that queries for data
- * with Gatsby's useStaticQuery component
- *
- * See: https://www.gatsbyjs.com/docs/use-static-query/
- */
-
 import React from "react"
 
 import PropTypes from "prop-types"
 
-import { Header } from "@ui"
+import { Box } from "@chakra-ui/react";
+import {
+    Head,
+    Header,
+    Link,
+} from "@ui"
 
 import "@fontsource/fira-mono"
 
 import "./styles.scss";
 
 
-// eslint-disable-next-line unused-imports/no-unused-vars
-const Layout = ({ context, asset, children, ...props }) => {
+export const MainLayout = ({ context, asset, children, ...props }) => {
     return (
         <>
+            <Head />
             <Header context={context} asset={asset} />
             <main {...props}>
                 {children}
             </main>
+            <Box textAlign="center" m="1em 1em">
+                This site was built using <Link to="/">Flapper</Link>.
+            </Box>
         </>
     )
 }
 
-Layout.propTypes = {children: PropTypes.node.isRequired}
-
-export default Layout
+MainLayout.propTypes = {children: PropTypes.node.isRequired}

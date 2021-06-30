@@ -3,7 +3,7 @@ require('source-map-support').install();
 require('ts-node').register({
     compilerOptions: {
         module: 'commonjs',
-        target: 'es2017',
+        target: 'es2020',
         esModuleInterop: true,
         sourceMap: true,
     },

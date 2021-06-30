@@ -1,0 +1,36 @@
+.proc {
+    font-size: 0.8em;
+    width: 100%;
+    padding: 2em;
+
+    border: 1px solid #dddddd;
+    box-shadow: 1px 1px 3px lightgray;
+    margin-bottom: 2em;
+
+    .name {
+        font-weight: 700;
+    }
+
+    .params {
+        margin-left: 3em;
+    }
+
+    .procParams {
+        display: grid;
+        grid-template-columns: min-content max-content;
+
+        .paramName {
+            margin-left: 2em;
+            text-align: right;
+        }
+
+        .paramType {
+            display: flex;
+            margin-left: 1em;
+        }
+    }
+
+    :global(.tdocParameterType) {
+        margin-left: 1em;
+    }
+}

@@ -1,0 +1,30 @@
+<h1>DeriveMultiAggregateType</h1>
+<Doc />
+<Proc />
+
+## Parameters
+
+<Params />
+
+## Example
+
+A `project_series` asset type is derived from the `project_post` asset type.
+
+Assuming you have `project` and `project_post` asset types, and that `project_post` assets have `.project_name` and `.series_name` fields:
+
+```javascript
+{
+  'project_series': [
+    DeriveSimpleAggregate(
+      'project_post',   // target asset type
+      'series',         // target asset field
+      [                 // value fields
+        'project_name',
+        'series_name'
+      ]
+    ),
+  ],
+}
+```
+
+`project_series` assets will be created for each group of `project_post` assets that have the same `.project_name` and `.series_name` fields.

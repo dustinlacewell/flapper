@@ -1,10 +1,13 @@
-import { Proc } from ".";
+import { ContentType, Context } from "@types"
 
+
+export type Processor =
+    (context: Context, type_name: string, assets: ContentType) => Promise<void>
 
 export type Stage = {
-    [key: string]: Proc[]
+    [key: string]: Processor[]
 }
 
-export type Stages = {
+export type Plan = {
     [key: string]: Stage
 }

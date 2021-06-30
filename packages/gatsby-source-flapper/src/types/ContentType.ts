@@ -1,6 +1,6 @@
-import { get_value } from "../utils";
+import { Asset } from "@types";
 
-import { Asset } from ".";
+import { get_value } from "../utils";
 
 
 export class ContentType extends Array<Asset> {
