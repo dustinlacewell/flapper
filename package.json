@@ -20,7 +20,7 @@
     "test": "yarn workspaces run test",
     "build": "yarn workspaces run build",
     "build:source": "yarn workspace @flapper/gatsby-source-flapper build && yarn docs",
-    "build:site": "yarn build:source && yarn build:components && yarn workspace @flapper/site build",
+    "build:site": "yarn build:source && yarn workspace @flapper/site build",
     "watch": "run-p watch:**",
     "prepublishOnly": "yarn build",
     "develop:site": "yarn workspace @flapper/site develop",

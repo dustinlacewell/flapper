@@ -12,7 +12,8 @@
     "url": "https://github.com/dustinlacewell/flapper/issues"
   },
   "scripts": {
-    "build": "gatsby build",
+    "build": "bin/build.sh",
+    "publish": "npx gh-pages -d public/",
     "develop": "gatsby develop --host=0.0.0.0",
     "develop:preview": "cross-env  ENABLE_GATSBY_REFRESH_ENDPOINT=true gatsby develop",
     "lint": "eslint --ignore-path .gitignore \"**/*.{js,jsx}\"",
