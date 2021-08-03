@@ -36,7 +36,6 @@ export const SetUrl = (pattern: string, removeExtension = true, cleanIndexes = t
                 prefixed_target = prefixed_target.endsWith('/index.html') ? prefixed_target.slice(0, prefixed_target.length - 10) : prefixed_target
             }
             asset.target = prefixed_target
-            console.log(`Set URL: ${asset.target}`)
         }
     }
 }

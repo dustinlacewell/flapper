@@ -25,7 +25,6 @@ const TypeParameters = (parameters) =>
 
 export const RenderFunction = (signature) => {
     signature = signature.signature
-    console.log(signature)
     const parameters = RenderProcParameters(signature.parameters)
     const typeParameters = TypeParameters(signature.typeParameter)
     const type = <Type type={signature.type} />

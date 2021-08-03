@@ -24,7 +24,6 @@ const SourceTypedocExports = (path) =>
         const exports = data.children as any[]
         exports.forEach(item => {
             const asset = NewAsset(path, item)
-            console.log(`Found typedoc for: ${item.name}`)
             a.push(asset)
         })
     }
