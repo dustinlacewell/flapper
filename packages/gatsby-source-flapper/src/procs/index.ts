@@ -6,6 +6,7 @@ export * from './DeriveUnifiedType';
 export * from './MakeMenu';
 export * from './RenderIndex';
 export * from './RenderJSON';
+export * from './RenderRSS';
 export * from './RenderTemplate';
 export * from './SetFields';
 export * from './SetRelativePath';
