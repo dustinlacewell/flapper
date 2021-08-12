@@ -23,12 +23,7 @@ export const RenderRSS = (filename: string, config: ConstructorParameters<typeof
         assets
             .map(handler)
             .forEach(data => {
-                console.log("RSS item data:")
-                console.table(data)
                 feed.item(data)
             })
-
-        console.log(`Rendering ${assets.length} ${type} assets to RSS`)
-
         fs.writeFileSync(path.join("./public", filename), feed.xml())
     }

@@ -19,8 +19,5 @@ export const RenderJSON = (filename: string, flatted = false) =>
         }
 
         const json = flatted ? stringify(assets) : JSON.stringify(assets)
-
-        console.log(`Rendering ${assets.length} ${type} assets to JSON`)
-
         fs.writeFileSync(path.join("./public", filename), json)
     }
