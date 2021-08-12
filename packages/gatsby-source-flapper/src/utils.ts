@@ -131,3 +131,8 @@ export const set_value = (object: {}, attrs: string, value: any) => {
 
     object[parts[parts.length - 1]] = value
 }
+
+export const logMenu = (menu, depth) => {
+    console.log(`${"-".repeat(depth*2)} ${menu.name}`)
+    menu.children.forEach(child => logMenu(child, depth+1))
+}
