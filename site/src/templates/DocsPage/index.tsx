@@ -1,7 +1,7 @@
 import * as React from "react"
 
 import { Box, Flex } from "@chakra-ui/react";
-import { SiteTemplate } from '@flapper/gatsby-source-flapper/src/SiteTemplate'
+import { SiteTemplate } from '@flapper/gatsby-source-flapper/src/ui'
 import { MainLayout } from "@layouts";
 import {
     Link,

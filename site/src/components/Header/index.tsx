@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { Box, Flex } from '@chakra-ui/react'
-import { CheckMenu } from '@flapper/gatsby-source-flapper/src/procs/MakeMenu'
+import { CheckMenu } from '@flapper/gatsby-source-flapper/src/ui'
 import { Link } from '@ui'
 
 import Logo from '../../images/flapper.svg'

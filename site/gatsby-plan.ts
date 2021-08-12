@@ -7,6 +7,7 @@ import {
     Menu,
     NewAsset,
     Plan,
+    RenderIndex,
     RenderTemplate,
     SetRelativePath,
     SetTitle,
@@ -42,7 +43,7 @@ const BindToTypedoc = async (c, t, a) => {
         if (!procExport) {
             throw new Error(`Couldn't bind ${asset.title} to typedoc export!`)
         }
-        asset.typedoc = procExport
+        asset.typedoc = procExport.id
     })
 }
 
@@ -88,6 +89,16 @@ const plan: Plan = {
             SourceFilesRecursively('content/pages/', ['.tsx']),
             SetRelativePath('content/pages/'),
             SetUrl('{{relativePath}}'),
+        ],
+    },
+    indexing: {
+        "@": [
+            async (ctx) => {
+                for (const type of ctx.assets.keys()) {
+                    const assets = ctx.assets.get(type)
+                    RenderIndex()(ctx, type, assets)
+                }
+            },
         ],
     },
     'writing': {

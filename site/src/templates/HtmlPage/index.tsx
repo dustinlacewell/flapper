@@ -1,6 +1,6 @@
 import * as React from "react"
 
-import { SiteTemplate } from '@flapper/gatsby-source-flapper/src/SiteTemplate'
+import { SiteTemplate } from '@flapper/gatsby-source-flapper/src/ui'
 import { MainLayout } from "@layouts"
 
 
