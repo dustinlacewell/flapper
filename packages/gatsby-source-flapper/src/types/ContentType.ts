@@ -1,9 +1,23 @@
-import { Asset } from "@types";
+import { Asset, Context } from "@types";
 
 import { get_value } from "../utils";
 
 
 export class ContentType extends Array<Asset> {
+    context: Context
+
+    constructor(context: Context) {
+        super()
+        this.context = context
+    }
+
+    push(...assets) {
+        const retVal = Array.prototype.push.apply(this, assets)
+        assets.forEach(asset =>
+            this.context.index.set(asset.id, asset))
+        return retVal
+    }
+
     include(filter) {
         return this.filter(filter)
     }
