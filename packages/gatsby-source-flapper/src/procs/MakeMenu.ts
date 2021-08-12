@@ -43,7 +43,7 @@ export class Menu {
         this.parent_name = menu.parent_name
         this.asset_id = menu.asset_id
         this.asset_target = menu.asset_target
-        this.children = menu.children
+        this.children = [...this.children, ...menu.children]
         this.priority = menu.priority
         this.label = menu.label
     }
@@ -82,7 +82,7 @@ export const GetMenu = (context, name) => {
     return menu
 }
 
-export const AddMenu = (context, new_menu) => {
+export const AddMenu = (context, new_menu: Menu) => {
     const menu = GetMenu(context, new_menu.name)
     menu.copy(new_menu)
 
@@ -90,19 +90,6 @@ export const AddMenu = (context, new_menu) => {
         const parent = GetMenu(context, menu.parent_name)
         parent.add(menu)
     }
-}
-
-export const CheckMenu = (menu, asset_id) => {
-    if (menu.asset_id === asset_id) {
-        return true
-    }
-    for (const child of menu.children) {
-        if (CheckMenu(child, asset_id)) {
-            return true
-        }
-    }
-
-    return false
 }
 
 /**
@@ -115,25 +102,20 @@ export const CheckMenu = (menu, asset_id) => {
  * @param priority Ordering priority among sibling nodes.
  */
 export const MakeMenu = (name: string, parent: string = null, label: string = '', priority: number = 0): Processor => {
+    // compile templates
     const name_template = Handlebars.compile(name)
     const parent_template = Handlebars.compile(parent || '')
     const label_template = Handlebars.compile(label || '')
 
     return async (context, type, assets) => {
-        const menus = GetMenus(context)
-
         for (const asset of assets) {
+            // render templates
             const menu_name = name_template(asset)
             const parent_name = parent_template(asset)
             const menu_label = label_template(asset)
 
-            let menu = menus[menu_name]
-            if (menu) {
-                throw new Error(`Duplicate menu in type ${type}: ${menu_name} : ${name}`)
-            } else {
-                menu = new Menu(menu_name, asset, parent_name, menu_label, priority)
-            }
-            console.log(`*** Menu: ${type}: ${menu.label} => ${menu.asset_target}`)
+            // find existing menu
+            let menu = new Menu(menu_name, asset, parent_name, menu_label, priority)
             AddMenu(context, menu)
         }
     }
