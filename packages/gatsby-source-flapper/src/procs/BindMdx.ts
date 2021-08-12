@@ -38,7 +38,6 @@ export const BindMdx = (pattern: string): Processor => {
                     asset[key] = value
                 }
             } else {
-                delete asset['mdx']
                 console.warn(`Couldn't find MDX at: ${path}`)
             }
         }
