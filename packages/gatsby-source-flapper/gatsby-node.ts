@@ -6,6 +6,7 @@ import { CreatePageUtils } from "./src/utils";
 type PluginOptions = {
     plan: Plan,
     context: { [key: string]: any },
+    callback?: (context: Context) => void,
 }
 
 export const createPages = async (createPageUtils: CreatePageUtils, pluginOptions: PluginOptions) => {
@@ -35,5 +36,8 @@ export const createPages = async (createPageUtils: CreatePageUtils, pluginOption
                 }
             }
         }
+    }
+    if (pluginOptions.callback) {
+        pluginOptions.callback(context)
     }
 }
