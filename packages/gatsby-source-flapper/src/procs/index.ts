@@ -2,6 +2,7 @@ export * from './BindMdx';
 export * from './DeriveAggregateType';
 export * from './DeriveJoinedType';
 export * from './DeriveMultiAggregateType';
+export * from './DeriveUnifiedType';
 export * from './MakeMenu';
 export * from './RenderIndex';
 export * from './RenderTemplate';
