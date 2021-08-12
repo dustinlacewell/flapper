@@ -3,6 +3,7 @@ export * from './DeriveAggregateType';
 export * from './DeriveJoinedType';
 export * from './DeriveMultiAggregateType';
 export * from './MakeMenu';
+export * from './RenderIndex';
 export * from './RenderTemplate';
 export * from './SetFields';
 export * from './SetRelativePath';

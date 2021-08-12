@@ -29,17 +29,18 @@ export const DeriveAggregateType = (target_type: string, value_field: string, ta
         const groups: {[key: string]: Asset[]} = {}
         for (const other_asset of other_assets) {
             const value = get_value(other_asset, value_field)
+            if (!value) continue
             const group = groups[value] || []
             group.push(other_asset)
             groups[value] = group
         }
 
         for (const [group_key, group_assets] of Object.entries(groups)) {
-            const metadata = { name: group_key, assets: group_assets }
+            const metadata = { name: group_key, assets: group_assets.map(a => a.id) }
             const new_asset = NewAsset(DeriveAggregateType.name, metadata)
             new_asset.type = type
             for (const group_asset of group_assets) {
-                group_asset[target_field] = new_asset
+                group_asset[target_field] = new_asset.id
             }
             assets.push(new_asset)
         }

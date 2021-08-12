@@ -1,6 +1,6 @@
 
 export const ProxyAsset = (asset) => {
-    const _metadata = {id : `Proxied: ${asset.id}`}
+    const _metadata = {id : `${asset.id}P`}
 
     return new Proxy(asset, {
         get: function(obj, prop) {

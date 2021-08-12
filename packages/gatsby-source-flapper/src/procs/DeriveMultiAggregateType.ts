@@ -38,13 +38,13 @@ export const DeriveMultiAggregateType = (target_type: string, target_field: stri
                 name: name_template(value_map),
                 assets: [],
             })
-            aggregate['assets'].push(other_asset)
+            aggregate['assets'].push(other_asset.id)
             aggregates.set(value_list, aggregate)
         }
 
         for (const aggregate of aggregates.values()) {
             for (const asset of aggregate['assets']) {
-                asset[target_field] = aggregate
+                asset[target_field] = aggregate.id
             }
             assets.push(aggregate)
         }

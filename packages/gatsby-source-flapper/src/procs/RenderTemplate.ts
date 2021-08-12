@@ -1,10 +1,27 @@
-import path from 'path';
+import path from "path"
 
-import { stringify } from 'flatted';
-import Handlebars from 'handlebars';
+import { stringify } from "flatted"
+import Handlebars from "handlebars"
 
-import { Processor } from '@types';
+import {
+    ContentType,
+    Context,
+    Processor,
+} from "@types"
 
+
+const createIndex = (assetMap: Map<string, ContentType>) => {
+    const index = {}
+    for (const key of assetMap.keys()) {
+        const assets = assetMap.get(key)
+        const group = index[key] || []
+        for (const asset of assets) {
+            group.push(asset.id)
+        }
+        index[key] = group
+    }
+    return index
+}
 
 /**
  *
@@ -14,16 +31,15 @@ import { Processor } from '@types';
  *
  * @param pattern Should evaluate to the filename of a template.
  */
-export const RenderTemplate = (pattern: string): Processor => {
+export const RenderTemplate = (pattern: string, reducer?: ((ctx: Context, defaultCtx: any) => any)): Processor => {
     const template = Handlebars.compile(pattern)
     return async (context, type, assets) => {
-        const safeContext = {assets: {}, menus: context['menus'] }
-        context.assets.forEach((value, key) => {
-            safeContext.assets[key] = value
-        })
+        const index = createIndex(context.assets)
+        const safeContext = { assets: { [type]: assets }, menus: context['menus'], index }
         for (const asset of assets) {
             if (asset.target) {
-                const pageContext = { data: stringify({ context: safeContext, asset }) }
+                const pageData = reducer ? reducer(context, safeContext) : safeContext
+                const pageContext = { data: stringify({ context: pageData, asset }) }
                 context.utils.actions.createPage({
                     path: asset.target,
                     component: path.resolve(template(asset)),

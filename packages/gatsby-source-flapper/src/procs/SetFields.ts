@@ -27,7 +27,7 @@ export const fk = (search_type: string, search_attr: string, test_attr: string) 
         const assetType = context.getAssetType(search_type)
         const value = get_value(asset, test_attr)
         const result = assetType.find_matching(search_attr, value)
-        return result
+        return result.id
     }
 }
 
@@ -36,7 +36,7 @@ export const agg_fk = (search_type: string, search_attr: string, test_attr: stri
         const assetType = context.getAssetType(search_type)
         const value = asset['assets'][0][test_attr]
         const result = assetType.find_matching(search_attr, value)
-        return result
+        return result.id
     }
 }
 
@@ -53,6 +53,6 @@ export const o2m = (search_type: string, search_attr: string, test_attr: string)
         const assetType = context.getAssetType(search_type)
         const value = get_value(asset, test_attr)
         const result = assetType.find_all_matching(search_attr, value)
-        return result
+        return result.map(a => a.id)
     }
 }
