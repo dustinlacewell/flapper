@@ -1,6 +1,6 @@
 import Handlebars from 'handlebars';
 
-import { NewAsset,Processor } from '@types';
+import {Processor } from '@types';
 
 
 const rsplit = (input: string, sep: string, maxsplit: number): string[] => {
@@ -20,9 +20,6 @@ const rsplit = (input: string, sep: string, maxsplit: number): string[] => {
 export const SetUrl = (pattern: string, removeExtension = true, cleanIndexes = true): Processor => {
     const template = Handlebars.compile(pattern)
     return async (context, type, assets) => {
-        if (assets.length === 0) {
-            assets.push(NewAsset(SetUrl.name, {name: "Generated"}))
-        }
         for (const asset of assets) {
             const rendered_target = template(asset)
             let no_ext_target = rendered_target;
