@@ -1,4 +1,14 @@
 {
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/src/**/*.js": true,
+        "**/*.js.map": true,
+        "**/*.d.ts": true
+    },
     // use workspace typescript
     "typescript.tsdk": "./node_modules/typescript/lib",
 
@@ -21,7 +31,6 @@
     "[jsonc]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
-    "typescript.preferences.importModuleSpecifier": "non-relative",
     "tsImportSorter.configuration.autoFormat": "off",
 
     // disable vscode format on save
@@ -70,13 +79,5 @@
         "usestatefulref",
         "usesystem",
         "usetimer"
-    ],
-    "files.exclude": {
-        "packages/gatsby-source-flapper/**/src/**/*.js": true,
-        "packages/gatsby-source-flapper/**/src/**/*.js.map": true,
-        "packages/gatsby-source-flapper/**/gatsby-node.js": true,
-        "packages/gatsby-source-flapper/**/gatsby-node.js.map": true,
-        "packages/gatsby-source-flapper/**/index.js": true,
-        "packages/gatsby-source-flapper/**/index.js.map": true
-    }
+    ]
 }
