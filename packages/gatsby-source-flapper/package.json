@@ -24,6 +24,7 @@
     "url": "https://github.com/dustinlacewell/flapper.git"
   },
   "scripts": {
+    "clean": "npx del-cli src/**/*.js src/**/*.js.map src/**/*.d.ts !src",
     "build": "tsc && tsc-alias -p tsconfig.json",
     "format": "prettier --write \"**/*.ts\"",
     "lint": "eslint **/*.ts",
@@ -54,6 +55,7 @@
     "@typescript-eslint/eslint-plugin": "2.16.0",
     "@typescript-eslint/parser": "2.16.0",
     "cross-env": "^7.0.2",
+    "del-cli": "^4.0.1",
     "eslint": "6.8.0",
     "gatsby": "^3.0.0",
     "gatsby-core-utils": "^2.0.0",
