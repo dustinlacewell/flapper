@@ -15,7 +15,7 @@
     "site"
   ],
   "scripts": {
-    "clean": "find ./packages/gatsby-source-flapper/src -name '*.js'",
+    "clean": "yarn workspace @flapper/gatsby-source-flapper clean",
     "docs": "typedoc --json site/content/docs/typedoc.json --out /tmp/flapper --exclude \"**/graphql.ts\" --tsconfig packages/gatsby-source-flapper/tsconfig.json packages/gatsby-source-flapper/src/index.ts",
     "lint": "yarn workspaces run lint",
     "test": "yarn workspaces run test",
