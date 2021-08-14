@@ -1,7 +1,7 @@
 {
   "name": "@flapper/gatsby-source-flapper",
   "description": "A flexible alternative to GraphQL for Gatsby",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "main": "src/index.js",
   "types": "src/index.d.ts",
   "license": "MIT",
