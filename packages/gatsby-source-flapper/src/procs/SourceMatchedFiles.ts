@@ -1,5 +1,7 @@
 import fs from 'fs'
 
+import slash from "slash"
+
 import {
     ContentType,
     NewAsset,
@@ -24,7 +26,8 @@ export const SourceMatchedFiles = <T extends string>(path: T): Processor => {
     return async (context, type_name: string, assets: ContentType) => {
         const cwd = process.cwd()
         const results = await matchPaths(cwd, path)
-        for (const { path, meta } of results) {
+        for (let { path, meta } of results) {
+            path = slash(path)
             const stats = await statFile(path)
             const content = fs.readFileSync(path).toString()
             const metadata = {

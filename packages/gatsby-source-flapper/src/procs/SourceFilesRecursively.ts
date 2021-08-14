@@ -7,6 +7,7 @@ import {
 } from 'path'
 
 import recursive from "recursive-readdir";
+import slash from "slash"
 
 import { NewAsset,Processor } from '@types';
 import { statFile } from '@utils';
@@ -25,13 +26,16 @@ export const SourceFilesRecursively = (search_path: string, extensions: string[]
     const full_search_path = join(process.cwd(), search_path)
     return async (context, type_name, assets) => {
         const files = (await recursive(full_search_path))
-            .map(path => ({
-                path,
-                stats: statFile(path),
-                extension: extname(path),
-                dirname: dirname(path),
-                basename: basename(path),
-            }))
+            .map(path => {
+                path = slash(path)
+                return {
+                    path,
+                    stats: statFile(path),
+                    extension: extname(path),
+                    dirname: dirname(path),
+                    basename: basename(path),
+                }
+            })
             .filter(data =>
                 extensions === null ? true : extensions.includes(data.extension))
         for (const file of files) {

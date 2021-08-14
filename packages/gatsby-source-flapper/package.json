@@ -45,6 +45,7 @@
     "npm": "^7.20.3",
     "recursive-readdir": "^2.2.2",
     "rss": "^1.2.2",
+    "slash": "^4.0.0",
     "title-case": "^3.0.3",
     "uuid": "^8.3.2"
   },
