@@ -7,10 +7,9 @@ import {
 } from 'path'
 
 import recursive from "recursive-readdir";
-import slash from "slash"
 
 import { NewAsset,Processor } from '@types';
-import { statFile } from '@utils';
+import { slash, statFile } from '@utils';
 
 
 /**

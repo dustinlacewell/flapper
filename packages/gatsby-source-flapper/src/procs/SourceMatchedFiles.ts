@@ -1,13 +1,15 @@
 import fs from 'fs'
 
-import slash from "slash"
-
 import {
     ContentType,
     NewAsset,
     Processor,
 } from '@types'
-import { matchPaths, statFile } from '@utils'
+import {
+    matchPaths,
+    slash,
+    statFile,
+} from '@utils'
 
 
 /**
