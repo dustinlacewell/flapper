@@ -31,12 +31,12 @@ export const parseQuery = (query) => {
         const data: any = balanced("{{", "}}", query);
 
         if (!data) {
-            regex += query;
+            regex += escapeRegExp(query);
             break;
         }
 
         const escaped: string = escapeRegExp(data.pre);
-        regex += `${escaped}(?<${data.body}>[^/]+)`;
+        regex += `${escaped}(?<${data.body}>[^\\/]+)`;
         query = data.post;
     }
 
@@ -87,6 +87,7 @@ export const matchPaths = async <T extends string>(root, query: T): Promise<Path
     const files = await recursive(root);
 
     return files
+        .map(slash)
         .map((path) => ({ path, match: pattern.exec(path) }))
         .filter((match) => match)
         .map(({ path, match }) => {
